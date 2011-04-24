@@ -7,10 +7,15 @@ SalonRemoto::SalonRemoto (std::string& salon)
 	fifo = iniciar (salon);	
 }
 
+SalonRemoto::~SalonRemoto ()
+{
+	delete fifo;
+}
+
 /**
  * Inicia el salón remoto si este no ha sido iniciado.
  */
-void SalonRemoto::iniciar (std::string& salon)
+FifoOutputStream* SalonRemoto::iniciar (std::string& salon)
 {
 	int err;
 
@@ -25,12 +30,16 @@ void SalonRemoto::iniciar (std::string& salon)
 	 * la conversación y que contiene el objeto Salon al que este
 	 * proxy accede.
 	 */
-	if (err == -1 && errno == EEXIST) {
-		int pid = fork ();
-		if (pid == 0) {
-		}
-		else if (pid == -1) {
+	if (err == 0) {
+		char *const argv[] = { salon.c_str (), NULL };
+		System::spawn ("salon", argv);
+	} else if (err == -1 && err != EEXIST) {
+		throw SystemErrorException ();
 	}
 
-	
+	/*
+	 * Abre el fifo durmiendo hasta que el salón haya terminado
+	 * su inicialización y abrá su extremo.
+	 */
+	return new FifoOutputStream (salon);
 }

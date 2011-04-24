@@ -4,14 +4,14 @@
 #include <errno.h>
 #include <exception>
 
-class system_error_exception : public std::exception
+class SystemrErrorException : public std::exception
 {
 	private:
 		int errno;
 
 	public:
-		system_error_exception () : errno (errno) {}
-		virtual ~system_error_exception ();
+		SystemErrorException () : errno (errno) {}
+		virtual ~SystemErrorException ();
 
 		virtual const char *what() const throw()
 		{
@@ -19,9 +19,9 @@ class system_error_exception : public std::exception
 		}
 };
 
-class system
+class System
 {
-	static void spawn 
+	static void spawn (const char *file, char *const argv[]); 
 };
 
 #endif

@@ -7,6 +7,8 @@
 class SalonRemoto : public Salon
 {
 	private:
+		FifoOutputStream *fifo;
+
 		void iniciar (std::string& salon);
 
 	public:

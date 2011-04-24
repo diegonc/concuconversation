@@ -1,23 +1,30 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include <errno.h>
 #include <exception>
 
-class SystemrErrorException : public std::exception
+#include <errno.h>
+#include <string.h>
+
+class SystemErrorException : public std::exception
 {
 	private:
-		int errno;
+		int number;
 
 	public:
-		SystemErrorException () : errno (errno) {}
-		virtual ~SystemErrorException ();
+		SystemErrorException () throw ();
+		virtual ~SystemErrorException () throw () { }
 
 		virtual const char *what() const throw()
 		{
-			return strerror (this->errno);
+			return strerror (this->number);
 		}
 };
+
+SystemErrorException::SystemErrorException () throw ()
+{
+	this->number = errno;
+}
 
 class System
 {

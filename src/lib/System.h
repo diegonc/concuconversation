@@ -28,7 +28,8 @@ SystemErrorException::SystemErrorException () throw ()
 
 class System
 {
-	static void spawn (const char *file, char *const argv[]); 
+	public:
+		static void spawn (const char *file, char *const argv[]); 
 };
 
 #endif

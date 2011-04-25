@@ -1,6 +1,7 @@
-#include <SalonRemoto.h>
-
 #include <sys/stat.h>
+
+#include <SalonRemoto.h>
+#include <System.h>
 
 SalonRemoto::SalonRemoto (std::string& salon)
 {
@@ -31,7 +32,8 @@ FifoOutputStream* SalonRemoto::iniciar (std::string& salon)
 	 * proxy accede.
 	 */
 	if (err == 0) {
-		char *const argv[] = { salon.c_str (), NULL };
+		char *const argv[] = { "salon",
+			const_cast<char *> (salon.c_str ()), NULL };
 		System::spawn ("salon", argv);
 	} else if (err == -1 && err != EEXIST) {
 		throw SystemErrorException ();

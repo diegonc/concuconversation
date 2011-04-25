@@ -2,6 +2,8 @@
 #define SALONREMOTO_H
 
 #include <string>
+
+#include <FifoOutputStream.h>
 #include <Salon.h>
 
 class SalonRemoto : public Salon
@@ -9,7 +11,7 @@ class SalonRemoto : public Salon
 	private:
 		FifoOutputStream *fifo;
 
-		void iniciar (std::string& salon);
+		FifoOutputStream *iniciar (std::string& salon);
 
 	public:
 		SalonRemoto (std::string& salon);

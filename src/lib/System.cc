@@ -2,6 +2,11 @@
 
 #include <unistd.h>
 
+SystemErrorException::SystemErrorException () throw ()
+{
+	this->number = errno;
+}
+
 void System::spawn (const char *file, char *const argv[])
 {
 	int err;

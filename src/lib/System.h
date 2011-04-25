@@ -21,11 +21,6 @@ class SystemErrorException : public std::exception
 		}
 };
 
-SystemErrorException::SystemErrorException () throw ()
-{
-	this->number = errno;
-}
-
 class System
 {
 	public:

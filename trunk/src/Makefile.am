@@ -12,12 +12,16 @@ libSources = \
 	lib/FileExistsException.h 
 
 clienteSources = \
-	src/cliente/SalonRemoto.cc \
-	src/cliente/SalonRemoto.h
+	cliente/SalonRemoto.cc \
+	cliente/SalonRemoto.h
 
 salonSources = 
 
 bin_PROGRAMS = cliente/cliente salon/salon
 
 cliente_cliente_SOURCES = $(clienteSources) $(libSources)
+cliente_cliente_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cliente
+
 salon_salon_SOURCES = $(salonSources) $(libSources)
+salon_salon_CPPFLAGS = i$(AM_CPPFLAGS) -I$(srcdir)/salon
+

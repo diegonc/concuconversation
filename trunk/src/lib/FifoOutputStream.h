@@ -4,11 +4,17 @@
 #include <string>
 
 #include <File.h>
+#include <OutputStream.h>
 
-class FifoOutputStream : public File
+class FifoOutputStream : public OutputStream
 {
+	private:
+		File fifo;
+
 	public:
 		FifoOutputStream (std::string &path);
+
+		void write (size_t n, const char *data);
 };
 
 #endif

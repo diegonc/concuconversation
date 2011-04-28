@@ -11,7 +11,8 @@ libSources = \
 	lib/System.h \
 	lib/Salon.h \
 	lib/Salon.cc \
-	lib/FileExistsException.h 
+	lib/FileExistsException.h \
+	lib/OutputStream.h
 
 clienteSources = \
 	cliente/SalonRemoto.cc \

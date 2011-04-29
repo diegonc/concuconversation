@@ -12,7 +12,7 @@ class FifoOutputStream : public OutputStream
 		File fifo;
 
 	public:
-		FifoOutputStream (std::string &path);
+		FifoOutputStream (const std::string &path);
 
 		void write (size_t n, const char *data);
 };

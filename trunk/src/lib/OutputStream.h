@@ -1,6 +1,8 @@
 #ifndef OUTPUTSTREAM_H
 #define OUTPUTSTREAM_H
 
+#include <sys/types.h>
+
 class OutputStream
 {
 	public:

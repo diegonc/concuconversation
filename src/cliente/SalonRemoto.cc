@@ -35,7 +35,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 		char *const argv[] = { "salon",
 			const_cast<char *> (salon.c_str ()), NULL };
 		System::spawn ("salon", argv);
-	} else if (err == -1 && err != EEXIST) {
+	} else if (err == -1 && errno != EEXIST) {
 		throw SystemErrorException ();
 	}
 

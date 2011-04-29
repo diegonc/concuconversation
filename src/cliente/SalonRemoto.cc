@@ -3,7 +3,7 @@
 #include <SalonRemoto.h>
 #include <System.h>
 
-SalonRemoto::SalonRemoto (std::string& salon)
+SalonRemoto::SalonRemoto (const std::string& salon)
 {
 	fifo = iniciar (salon);	
 }
@@ -16,7 +16,7 @@ SalonRemoto::~SalonRemoto ()
 /**
  * Inicia el salón remoto si este no ha sido iniciado.
  */
-FifoOutputStream* SalonRemoto::iniciar (std::string& salon)
+FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 {
 	int err;
 

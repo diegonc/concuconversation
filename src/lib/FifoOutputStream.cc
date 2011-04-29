@@ -6,7 +6,7 @@
 #include <FifoOutputStream.h>
 #include <System.h>
 
-FifoOutputStream::FifoOutputStream (std::string &path)
+FifoOutputStream::FifoOutputStream (const std::string &path)
 	: fifo (path, O_WRONLY)
 {
 }

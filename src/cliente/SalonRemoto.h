@@ -11,10 +11,10 @@ class SalonRemoto : public Salon
 	private:
 		FifoOutputStream *fifo;
 
-		FifoOutputStream *iniciar (std::string& salon);
+		FifoOutputStream *iniciar (const std::string& salon);
 
 	public:
-		SalonRemoto (std::string& salon);
+		SalonRemoto (const std::string& salon);
 		virtual ~SalonRemoto ();
 };
 

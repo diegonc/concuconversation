@@ -1,5 +1,6 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
+AM_CXXFLAGS = -O0 -g
 AM_CPPFLAGS = -I$(srcdir)/lib
 
 libSources = \

@@ -45,3 +45,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	 */
 	return new FifoOutputStream (salon);
 }
+
+void SalonRemoto::post (const Message& msg)
+{
+}

@@ -6,7 +6,7 @@
 class Message
 {
 	public:
-		virtual void write (OutputStream& stream) = 0;
+		virtual void write (OutputStream& stream) const = 0;
 };
 
 #endif

@@ -12,6 +12,8 @@ class File
 	private:
 		int fd;
 
+		void inicializar (const char *path, int flags, mode_t mode);
+
 	public:
 		File (const std::string &path, int flags);
 		File (const std::string &path, int flags, mode_t mode);

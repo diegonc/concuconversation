@@ -48,4 +48,5 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 
 void SalonRemoto::post (const Message& msg)
 {
+	msg.write (*fifo);
 }

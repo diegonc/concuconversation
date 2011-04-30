@@ -4,16 +4,21 @@ AM_CXXFLAGS = -O0 -g
 AM_CPPFLAGS = -I$(srcdir)/lib
 
 libSources = \
-	lib/System.cc \
-	lib/File.h \
-	lib/File.cc \
-	lib/FifoOutputStream.h \
 	lib/FifoOutputStream.cc \
-	lib/System.h \
-	lib/Salon.h \
-	lib/Salon.cc \
+	lib/FifoOutputStream.h \
+	lib/File.cc \
+	lib/File.h \
 	lib/FileExistsException.h \
-	lib/OutputStream.h
+	lib/JoinMessage.cc \
+	lib/JoinMessage.h \
+	lib/Message.h \
+	lib/OutputStream.h \
+	lib/Packet.h \
+	lib/Packet.cc \
+	lib/Salon.cc \
+	lib/Salon.h \
+	lib/System.cc \
+	lib/System.h
 
 clienteSources = \
 	cliente/SalonRemoto.cc \

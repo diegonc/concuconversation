@@ -11,6 +11,10 @@ libSources = \
 	lib/FileExistsException.h \
 	lib/JoinMessage.cc \
 	lib/JoinMessage.h \
+	lib/TextMessage.cc \
+	lib/TextMessage.h \
+	lib/QuitMessage.cc \
+	lib/QuitMessage.h \
 	lib/Message.h \
 	lib/OutputStream.h \
 	lib/Packet.h \

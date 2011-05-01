@@ -52,11 +52,11 @@ std::string Cliente::readstring()
 		} if (isprint(c)) {
 			chars.push_back(c);
 			waddch (input, c);
-		} else if (c == KEY_BACKSPACE || c == '\b') {
+		} else if (c == KEY_BACKSPACE) {
 			wprintw (msg, "KBS ");
 			if (chars.size() > 0)
 				chars.pop_back ();
-			waddch (input, c);
+			waddch (input, '\b');
 			wdelch (input);
 		} else if (c == KEY_ENTER || c == '\n') {
 			break;

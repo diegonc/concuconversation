@@ -1,7 +1,7 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include <OutputStream.h>
+#include <io/OutputStream.h>
 
 class Message
 {

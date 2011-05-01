@@ -1,7 +1,7 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
-#include <string>
+#include <vector>
 
 #include <curses.h>
 
@@ -12,7 +12,7 @@ class Cliente
 		WINDOW* msg;
 		WINDOW* input;
 
-		std::string readstring ();
+		std::vector<char> input_buffer;
 
 	public:
 		Cliente ();

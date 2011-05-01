@@ -1,5 +1,5 @@
-#include <TextMessage.h>
-#include <Packet.h>
+#include <chat/TextMessage.h>
+#include <chat/Packet.h>
 
 TextMessage::TextMessage (const std::string& text)
 	: text (text)

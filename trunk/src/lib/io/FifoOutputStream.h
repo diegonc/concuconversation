@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include <File.h>
-#include <OutputStream.h>
+#include <io/OutputStream.h>
+#include <system/File.h>
 
 class FifoOutputStream : public OutputStream
 {

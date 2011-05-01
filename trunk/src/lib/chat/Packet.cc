@@ -1,4 +1,4 @@
-#include <Packet.h>
+#include <chat/Packet.h>
 
 Packet::Packet ()
 {

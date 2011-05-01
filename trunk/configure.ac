@@ -10,11 +10,13 @@ AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([src/config.h])
 
 # Checks for programs.
+# override default flags
+: ${CXXFLAGS:="-g -O0"}
 AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
-AC_CHECK_LIB([ncurses], [initscr])
+#AC_CHECK_LIB([ncurses], [initscr])
 
 # Checks for header files.
 AC_CHECK_HEADERS([fcntl.h string.h unistd.h])

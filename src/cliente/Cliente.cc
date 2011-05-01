@@ -38,56 +38,44 @@ Cliente::~Cliente ()
 	endwin ();
 }
 
-std::string Cliente::readstring()
-{
-	bool escaped = false;
-	int c;
-	std::vector<char> chars;
-
-	while ((c = wgetch (input)) != ERR) {
-		if (escaped) {
-			if (c == 'q')
-				throw "aborted";
-			escaped = false;
-		} if (isprint(c)) {
-			chars.push_back(c);
-			waddch (input, c);
-		} else if (c == KEY_BACKSPACE) {
-			wprintw (msg, "KBS ");
-			if (chars.size() > 0)
-				chars.pop_back ();
-			waddch (input, '\b');
-			wdelch (input);
-		} else if (c == KEY_ENTER || c == '\n') {
-			break;
-		} else if (c == 27)
-			escaped = true;
-
-		wprintw (msg, "key: %s (%d)\n", keyname (c), c);
-		wrefresh (msg);
-		wrefresh (input);
-	}
-
-	werase (input);
-	wnoutrefresh (input);
-
-	return std::string (chars.begin(), chars.end());
-}
 
 void Cliente::run ()
 {
 	bool running = true;
 	int c;
+	bool escaped = false;
 
-	wattron (msg, A_REVERSE);
 	while (running) {
-		std::string text = readstring ();
+		c = wgetch (input);
 
-		waddstr (msg, text.c_str ());
-		waddch (msg, '\n');
-		wrefresh (msg);
+		wprintw (msg, "key: %s (%d)\n", keyname (c), c);
+		
+		if (escaped) {
+			if (c == 'q')
+				break;
+			escaped = false;
+		} if (isprint (c)) {
+			input_buffer.push_back (c);
+			waddch (input, c);
+		} else if (c == KEY_BACKSPACE) {
+			if (input_buffer.size () > 0)
+				input_buffer.pop_back ();
+			waddch (input, '\b');
+			wdelch (input);
+		} else if (c == KEY_ENTER || c == '\n') {
+			input_buffer.push_back ('\n');
+
+			std::string text (input_buffer.begin(), input_buffer.end());
+			waddstr (msg, text.c_str ());
+			input_buffer.clear ();
+			werase (input);
+		} else if (c == 27)
+			escaped = true;
+
+		wnoutrefresh (msg);
+		wnoutrefresh (input);
+		doupdate ();
 	}
-	
 }
 
 

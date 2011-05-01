@@ -1,7 +1,7 @@
 #ifndef SALON_H
 #define SALON_H
 
-#include <Message.h>
+#include <chat/Message.h>
 
 class Salon
 {

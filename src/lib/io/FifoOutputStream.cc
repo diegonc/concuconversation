@@ -3,8 +3,8 @@
 #include <assert.h>
 #include <errno.h>
 
-#include <FifoOutputStream.h>
-#include <System.h>
+#include <io/FifoOutputStream.h>
+#include <system/System.h>
 
 FifoOutputStream::FifoOutputStream (const std::string &path)
 	: fifo (path, O_WRONLY)

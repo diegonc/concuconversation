@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <OutputStream.h>
+#include <io/OutputStream.h>
 
 class Packet
 {

@@ -1,5 +1,5 @@
-#include <QuitMessage.h>
-#include <Packet.h>
+#include <chat/QuitMessage.h>
+#include <chat/Packet.h>
 
 QuitMessage::QuitMessage (const std::string& name)
 	: name (name)

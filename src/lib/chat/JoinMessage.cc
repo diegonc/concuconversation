@@ -1,5 +1,5 @@
-#include <JoinMessage.h>
-#include <Packet.h>
+#include <chat/JoinMessage.h>
+#include <chat/Packet.h>
 
 JoinMessage::JoinMessage (const std::string& name)
 	: name (name)

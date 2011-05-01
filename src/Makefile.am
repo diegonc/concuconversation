@@ -4,25 +4,25 @@ AM_CXXFLAGS = -O0 -g
 AM_CPPFLAGS = -I$(srcdir)/lib
 
 libSources = \
-	lib/FifoOutputStream.cc \
-	lib/FifoOutputStream.h \
-	lib/File.cc \
-	lib/File.h \
-	lib/FileExistsException.h \
-	lib/JoinMessage.cc \
-	lib/JoinMessage.h \
-	lib/TextMessage.cc \
-	lib/TextMessage.h \
-	lib/QuitMessage.cc \
-	lib/QuitMessage.h \
-	lib/Message.h \
-	lib/OutputStream.h \
-	lib/Packet.h \
-	lib/Packet.cc \
-	lib/Salon.cc \
-	lib/Salon.h \
-	lib/System.cc \
-	lib/System.h
+	lib/chat/JoinMessage.cc \
+	lib/chat/JoinMessage.h \
+	lib/chat/Message.h \
+	lib/chat/Packet.cc \
+	lib/chat/Packet.h \
+	lib/chat/QuitMessage.cc \
+	lib/chat/QuitMessage.h \
+	lib/chat/Salon.cc \
+	lib/chat/Salon.h \
+	lib/chat/TextMessage.cc \
+	lib/chat/TextMessage.h \
+	lib/io/FifoOutputStream.cc \
+	lib/io/FifoOutputStream.h \
+	lib/io/OutputStream.h \
+	lib/system/File.cc \
+	lib/system/File.h \
+	lib/system/FileExistsException.h \
+	lib/system/System.cc \
+	lib/system/System.h
 
 clienteSources = \
 	cliente/Cliente.cc \

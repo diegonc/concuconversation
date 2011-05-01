@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include <FifoOutputStream.h>
-#include <Salon.h>
+#include <chat/Salon.h>
+#include <io/FifoOutputStream.h>
 
 class SalonRemoto : public Salon
 {

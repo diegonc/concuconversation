@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <Message.h>
+#include <chat/Message.h>
 
 class QuitMessage : public Message
 {

@@ -1,22 +1,8 @@
-#include <SalonRemoto.h>
-#include <Message.h>
-#include <JoinMessage.h>
-
-class MyMessage : public Message
-{
-	public:
-		void write (OutputStream& stream) const
-		{
-			stream.write (13, "test message\n");
-		}
-};
+#include <Cliente.h>
 
 int main (int argc, char **argv)
 {
-	SalonRemoto salon(std::string("test"));
-
-	salon.post (MyMessage());
-	salon.post (JoinMessage ("usuario"));
-
+	Cliente c;
+	c.run ();
 	return 0;
 }

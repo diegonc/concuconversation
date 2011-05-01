@@ -14,12 +14,16 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
+AC_CHECK_LIB([ncurses], [initscr])
 
 # Checks for header files.
-AC_CHECK_HEADERS([unistd.h])
+AC_CHECK_HEADERS([fcntl.h string.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
 AC_TYPE_MODE_T
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
 
 # Checks for library functions.
 AC_FUNC_FORK

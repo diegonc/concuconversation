@@ -18,6 +18,7 @@ libSources = \
 	lib/io/FifoOutputStream.cc \
 	lib/io/FifoOutputStream.h \
 	lib/io/OutputStream.h \
+	lib/utils/NonCopyable.h \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \

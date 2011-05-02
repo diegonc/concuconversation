@@ -24,7 +24,12 @@ class SystemErrorException : public std::exception
 class System
 {
 	public:
-		static void spawn (const char *file, char *const argv[]); 
+		static void spawn (const char *file, char *const argv[]);
+
+		static void check (int err)
+		{
+			if (err == -1) throw SystemErrorException ();
+		}
 };
 
 #endif

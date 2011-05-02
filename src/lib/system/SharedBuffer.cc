@@ -9,7 +9,7 @@ SharedBuffer::SharedBuffer (IPCName name, size_t size)
 	id = shmget (token, size, 0666 | IPC_CREAT);
 	System::check (id);
 
-	ptr = shmat (id, NULL, 0);
+	ptr = static_cast<char *>(shmat (id, NULL, 0));
 	if (ptr == (void *)-1) {
 		shmctl (id, IPC_RMID, NULL);
 	}

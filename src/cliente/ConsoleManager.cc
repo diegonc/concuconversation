@@ -9,7 +9,7 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	: input_size (4),
 	  listener (listener)
 {
-	trace (TRACE_MAXIMUM);
+	//trace (TRACE_MAXIMUM);
 
 	/* XXX: estupido curses, gracias por simular SA_RESTART... */
 	System::check (ioctl (fileno (stdin), FIONBIO, 1));

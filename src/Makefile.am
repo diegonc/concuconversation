@@ -19,7 +19,6 @@ libSources = \
 	lib/io/FifoOutputStream.cc \
 	lib/io/FifoOutputStream.h \
 	lib/io/OutputStream.h \
-	lib/utils/NonCopyable.h \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \
@@ -29,7 +28,10 @@ libSources = \
 	lib/system/SharedBuffer.cc \
 	lib/system/SharedBuffer.h \
 	lib/system/System.cc \
-	lib/system/System.h
+	lib/system/System.h \
+	lib/utils/ArgParser.h \
+	lib/utils/ArgParser.cc \
+	lib/utils/NonCopyable.h
 
 clienteSources = \
 	cliente/Cliente.cc \

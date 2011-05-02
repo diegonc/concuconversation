@@ -47,7 +47,15 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	return new FifoOutputStream (salon);
 }
 
-void SalonRemoto::post (const Message& msg)
+void SalonRemoto::join (Usuario& u)
+{
+}
+
+void SalonRemoto::quit (Usuario& u)
+{
+}
+
+void SalonRemoto::post (const TextMessage& msg)
 {
 	msg.write (*fifo);
 }

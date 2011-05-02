@@ -2,7 +2,7 @@
 
 int main (int argc, char **argv)
 {
-	Cliente c (argc, argv);
+	Cliente c (ArgParser (argc, argv));
 	c.run ();
 	return 0;
 }

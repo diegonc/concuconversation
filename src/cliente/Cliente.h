@@ -2,14 +2,17 @@
 #define CLIENTE_H
 
 #include <ConsoleManager.h>
+#include <SalonRemoto.h>
+#include <utils/ArgParser.h>
 
 class Cliente : public ConsoleListener
 {
 	private:
 		ConsoleManager console;
+		SalonRemoto salon;
 
 	public:
-		Cliente (int argc, char **argv);
+		Cliente (const ArgParser& args);
 		~Cliente ();
 
 		void run ();

@@ -5,8 +5,9 @@
 
 #include <Cliente.h>
 
-Cliente::Cliente (int arg, char **argv)
-	: console (*this)
+Cliente::Cliente (const ArgParser& args)
+	: console (*this),
+	  salon (args.salon ())
 {
 
 }

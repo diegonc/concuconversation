@@ -15,6 +15,7 @@ libSources = \
 	lib/chat/Salon.h \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
+	lib/char/Usuario.h \
 	lib/io/FifoOutputStream.cc \
 	lib/io/FifoOutputStream.h \
 	lib/io/OutputStream.h \
@@ -33,6 +34,8 @@ libSources = \
 clienteSources = \
 	cliente/Cliente.cc \
 	cliente/Cliente.h \
+	cliente/ConsoleManager.cc \
+	cliente/ConsoleManager.h \
 	cliente/SalonRemoto.cc \
 	cliente/SalonRemoto.h \
 	cliente/main.cc

@@ -1,6 +1,8 @@
 #ifndef SALON_H
 #define SALON_H
 
+class Salon;
+
 #include <chat/TextMessage.h>
 #include <chat/Usuario.h>
 
@@ -13,7 +15,6 @@ class Salon
 		virtual void quit (Usuario& u) = 0;
 
 		virtual void post (const TextMessage& msg) = 0;
-
 };
 
 #endif

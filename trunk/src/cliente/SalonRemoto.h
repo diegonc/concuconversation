@@ -17,7 +17,9 @@ class SalonRemoto : public Salon
 		SalonRemoto (const std::string& salon);
 		virtual ~SalonRemoto ();
 
-		virtual void post (const Message& msg);
+		virtual void join (Usuario& u);
+		virtual void quit (Usuario& u);
+		virtual void post (const TextMessage& msg);
 };
 
 #endif

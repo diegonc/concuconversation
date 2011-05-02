@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/select.h>
@@ -12,7 +13,8 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	//trace (TRACE_MAXIMUM);
 
 	/* XXX: estupido curses, gracias por simular SA_RESTART... */
-	System::check (ioctl (fileno (stdin), FIONBIO, 1));
+	int nonblock = 1;
+	System::check (ioctl (fileno (stdin), FIONBIO, &nonblock));
 
 	/* Inicializacion de curses. */
 	initscr ();
@@ -78,7 +80,7 @@ int ConsoleManager::next_char (WINDOW *w)
 
 enum ConsoleManager::cause ConsoleManager::run ()
 {
-	enum ConsoleManager::cause status;
+	enum ConsoleManager::cause status = ERROR;
 	bool running = true;
 	int c;
 	bool escaped = false;
@@ -129,6 +131,7 @@ enum ConsoleManager::cause ConsoleManager::run ()
 		wnoutrefresh (input);
 		doupdate ();
 	}
+	return status;
 }
 
 void ConsoleManager::append (const std::string& msg)

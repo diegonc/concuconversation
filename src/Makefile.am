@@ -21,6 +21,11 @@ libSources = \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \
+	lib/system/IPCName.h \
+	lib/system/Semaphore.cc \
+	lib/system/Semaphore.h \
+	lib/system/SharedBuffer.cc \
+	lib/system/SharedBuffer.h \
 	lib/system/System.cc \
 	lib/system/System.h
 

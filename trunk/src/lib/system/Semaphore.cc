@@ -1,5 +1,9 @@
 #include <stdexcept>
 
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+
 #include <system/Semaphore.h>
 #include <system/System.h>
 

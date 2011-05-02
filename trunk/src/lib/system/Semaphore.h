@@ -13,8 +13,8 @@ class Semaphore
 		void initialize (key_t, int, int);
 
 	public:
-		Semaphore (key_t key);
-		Semaphore (IPCName name);
+		Semaphore (key_t key, int nsems);
+		Semaphore (IPCName name, int nsems);
 
 		void set (int idx, int value);
 		void wait (int idx, int value = 1);

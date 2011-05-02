@@ -16,10 +16,12 @@ Cliente::~Cliente ()
 
 }
 
-
 void Cliente::run ()
 {
-	console.run ();
+	ConsoleManager::cause cause;
+	do {
+		cause = console.run ();
+	} while (cause != ConsoleManager::EXIT_REQUESTED);
 }
 
 void Cliente::onInputLine (const std::string& text)

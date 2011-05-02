@@ -2,7 +2,7 @@
 
 int main (int argc, char **argv)
 {
-	Cliente c;
+	Cliente c (argc, argv);
 	c.run ();
 	return 0;
 }

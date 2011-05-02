@@ -1,24 +1,20 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
-#include <vector>
+#include <ConsoleManager.h>
 
-#include <curses.h>
-
-class Cliente
+class Cliente : public ConsoleListener
 {
 	private:
-		int input_size;
-		WINDOW* msg;
-		WINDOW* input;
-
-		std::vector<char> input_buffer;
+		ConsoleManager console;
 
 	public:
-		Cliente ();
+		Cliente (int argc, char **argv);
 		~Cliente ();
 
 		void run ();
+
+		void onInputLine (const std::string& text);
 };
 
 #endif

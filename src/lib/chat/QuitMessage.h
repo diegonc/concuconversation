@@ -17,6 +17,7 @@ class QuitMessage : public Message
 		QuitMessage (const std::string& name);
 
 		void write (OutputStream& stream) const;
+		std::string toString () const;
 };
 
 #endif

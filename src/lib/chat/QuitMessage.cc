@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <chat/QuitMessage.h>
 #include <chat/Packet.h>
 
@@ -14,4 +16,11 @@ void QuitMessage::write (OutputStream& stream) const
 	pkt.push (name);
 
 	pkt.write (stream);
+}
+
+std::string QuitMessage::toString () const
+{
+	std::ostringstream oss;
+	oss << name << " has salido de la sala." << std::endl;
+	return oss.str();
 }

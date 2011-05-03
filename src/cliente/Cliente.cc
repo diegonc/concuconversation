@@ -7,9 +7,10 @@
 
 Cliente::Cliente (const ArgParser& args)
 	: console (*this),
-	  salon (args.salon ())
+	  salon (args.salon ()),
+	  usuario (console, args.nombre ())
 {
-
+	usuario.unirse (&salon);
 }
 
 Cliente::~Cliente ()

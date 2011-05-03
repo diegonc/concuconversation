@@ -15,11 +15,13 @@ int main (int argc, char **argv)
 	/* desbloquear clientes */
 	FifoInputStream fifo( (std::string (argv[1])) );
 
-	char buffer;
-	while (true) {
-		fifo.read (1, &buffer);
-		write (1, &buffer, 1);
-	}
+	try {
+		char buffer;
+		while (true) {
+			fifo.read (1, &buffer);
+			write (1, &buffer, 1);
+		}
+	} catch (...) { }
 
 	return 0;
 }

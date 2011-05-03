@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <chat/JoinMessage.h>
 #include <chat/Packet.h>
 
@@ -15,3 +17,10 @@ void JoinMessage::write (OutputStream& stream) const
 
 	pkt.write (stream);
 }
+
+std::string JoinMessage::toString () const
+{
+	std::ostringstream oss;
+	oss << name << " ha entrado a la sala." << std::endl;
+	return oss.str();
+}   

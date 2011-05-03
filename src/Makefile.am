@@ -15,7 +15,8 @@ libSources = \
 	lib/chat/Salon.h \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
-	lib/char/Usuario.h \
+	lib/chat/Usuario.cc \
+	lib/chat/Usuario.h \
 	lib/io/FifoInputStream.cc \
 	lib/io/FifoInputStream.h \
 	lib/io/FifoOutputStream.cc \
@@ -34,17 +35,19 @@ libSources = \
 	lib/system/System.h \
 	lib/system/InitializedSemaphore.cc \
 	lib/system/InitializedSemaphore.h \
-	lib/utils/ArgParser.cc \
-	lib/utils/ArgParser.h \
 	lib/utils/NonCopyable.h
 
 clienteSources = \
+	cliente/ArgParser.cc \
+	cliente/ArgParser.h \
 	cliente/Cliente.cc \
 	cliente/Cliente.h \
 	cliente/ConsoleManager.cc \
 	cliente/ConsoleManager.h \
 	cliente/SalonRemoto.cc \
 	cliente/SalonRemoto.h \
+	cliente/UsuarioImpl.cc \
+	cliente/UsuarioImpl.h \
 	cliente/main.cc
 
 salonSources = \

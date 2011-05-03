@@ -60,5 +60,7 @@ void SalonRemoto::quit (Usuario& u)
 
 void SalonRemoto::post (const TextMessage& msg)
 {
+	lock->wait ();
 	msg.write (*fifo);
+	lock->signal ();
 }

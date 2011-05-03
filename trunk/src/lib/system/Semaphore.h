@@ -17,8 +17,8 @@ class Semaphore
 		virtual ~Semaphore ();
 
 		void set (int idx, int value);
-		void wait (int idx, int value = 1);
-		void signal (int idx, int value = 1);
+		void wait (int idx = 0, int value = 1);
+		void signal (int idx = 0, int value = 1);
 };
 
 #endif

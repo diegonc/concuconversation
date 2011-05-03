@@ -2,6 +2,8 @@
 #include <sys/stat.h>
 
 #include <SalonRemoto.h>
+#include <chat/JoinMessage.h>
+#include <chat/QuitMessage.h>
 #include <system/System.h>
 
 SalonRemoto::SalonRemoto (const std::string& salon)
@@ -52,13 +54,22 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 
 void SalonRemoto::join (Usuario& u)
 {
+	JoinMessage msg (u.getNombre ());
+	doPost (msg);
 }
 
 void SalonRemoto::quit (Usuario& u)
 {
+	QuitMessage msg(u.getNombre ());
+	doPost (msg);
 }
 
 void SalonRemoto::post (const TextMessage& msg)
+{
+	doPost (msg);
+}
+
+void SalonRemoto::doPost (const Message& msg)
 {
 	lock->wait ();
 	msg.write (*fifo);

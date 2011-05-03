@@ -18,6 +18,11 @@ class Usuario
 			  salon (NULL) {}
 		virtual ~Usuario () {}
 
+		const std::string& getNombre () const
+		{
+			return nombre;
+		}
+
 		virtual void unirse (Salon *salon) = 0;
 		virtual void recibir (const Message& m) = 0;
 		virtual void enviar (const Message& m) = 0;

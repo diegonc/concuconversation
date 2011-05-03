@@ -16,8 +16,11 @@ libSources = \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
 	lib/char/Usuario.h \
+	lib/io/FifoInputStream.cc \
+	lib/io/FifoInputStream.h \
 	lib/io/FifoOutputStream.cc \
 	lib/io/FifoOutputStream.h \
+	lib/io/InputStream.h \
 	lib/io/OutputStream.h \
 	lib/system/File.cc \
 	lib/system/File.h \

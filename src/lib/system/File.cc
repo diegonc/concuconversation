@@ -36,3 +36,8 @@ int File::write (size_t n, const char *data)
 {
 	return ::write (fd, data, n);	
 }
+
+int File::read (size_t n, char *data)
+{
+	return ::read (fd, data, n);	
+}

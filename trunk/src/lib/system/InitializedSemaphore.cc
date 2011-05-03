@@ -8,14 +8,14 @@
 #include <system/InitializedSemaphore.h>
 #include <system/System.h>
 
-InitializedSemaphore::InitializedSemaphore (IPCName name, int nsems)
-	: Semaphore (name, nsems, 0666 | IPC_CREAT)
+InitializedSemaphore::InitializedSemaphore (IPCName name, int nsems, int flags)
+	: Semaphore (name, nsems, flags)
 {
 	initialize ();
 }
 
-InitializedSemaphore::InitializedSemaphore (key_t key, int nsems)
-	: Semaphore (key, nsems, 0666 | IPC_CREAT)
+InitializedSemaphore::InitializedSemaphore (key_t key, int nsems, int flags)
+	: Semaphore (key, nsems, flags)
 {
 	initialize ();
 }

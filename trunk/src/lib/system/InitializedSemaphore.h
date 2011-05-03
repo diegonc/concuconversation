@@ -12,8 +12,8 @@ class InitializedSemaphore : public Semaphore
 		void initialize ();
 
 	public:
-		InitializedSemaphore (key_t key, int nsems);
-		InitializedSemaphore (IPCName name, int nsems);
+		InitializedSemaphore (key_t key, int nsems, int flags);
+		InitializedSemaphore (IPCName name, int nsems, int flags);
 };
 
 #endif

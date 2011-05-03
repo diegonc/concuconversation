@@ -22,6 +22,7 @@ class File
 		~File ();
 
 		int write (size_t n, const char *data);
+		int read (size_t n, char *data);
 };
 
 #endif

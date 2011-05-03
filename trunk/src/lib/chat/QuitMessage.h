@@ -1,5 +1,5 @@
-#ifndef JOINMESSAGE_H
-#define JOINMESSAGE_H
+#ifndef QUITMESSAGE_H
+#define QUITMESSAGE_H
 
 #include <string>
 

@@ -31,8 +31,8 @@ libSources = \
 	lib/system/System.h \
 	lib/system/InitializedSemaphore.cc \
 	lib/system/InitializedSemaphore.h \
-	lib/utils/ArgParser.h \
 	lib/utils/ArgParser.cc \
+	lib/utils/ArgParser.h \
 	lib/utils/NonCopyable.h
 
 clienteSources = \

@@ -8,26 +8,24 @@
 #include <system/Semaphore.h>
 #include <system/System.h>
 
-Semaphore::Semaphore (IPCName name, int nsems)
+Semaphore::Semaphore (IPCName name, int nsems, int flags) : nsems (nsems)
 {
 	key_t token = ftok (name.path, name.index);
 	System::check (token);
 
-	initialize (token, nsems, 0666 | IPC_CREAT);
+	id = semget (token, nsems, flags);
+	System::check (id);
 }
 
-Semaphore::Semaphore (key_t key, int nsems)
-{
-	initialize (key, nsems, 0666 | IPC_CREAT);
-}
-
-void Semaphore::initialize (key_t key, int nsems, int flags)
+Semaphore::Semaphore (key_t key, int nsems, int flags) : nsems (nsems)
 {
 	id = semget (key, nsems, flags);
 	System::check (id);
+}
 
-	for (int i=0; i < nsems; i++)
-		set (i, 0);
+Semaphore::~Semaphore ()
+{
+	semctl (id, 0, IPC_RMID);
 }
 
 void Semaphore::set (int idx, int value)

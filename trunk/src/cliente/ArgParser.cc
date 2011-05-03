@@ -1,6 +1,8 @@
 #include <stdexcept>
 
-#include <utils/ArgParser.h>
+#include <unistd.h>
+
+#include <ArgParser.h>
 
 namespace {
 	std::string usage (const char *prg)
@@ -11,6 +13,7 @@ namespace {
 }
 
 ArgParser::ArgParser (int argc, char **argv)
+	: _nombre (getlogin ())
 {
 	const char *prg = argv[0];
 
@@ -23,9 +26,15 @@ ArgParser::ArgParser (int argc, char **argv)
 	bool room = false;
 	while (argc > 0) {
 		if (argv[0][0] == '-')
-		       if (argv[0][1] == 'd')
+			if (argv[0][1] == 'd')
 				_debug = true;
-			else
+			else if (argv[0][1] == 'n') {
+				if (--argc == 0)
+					usage (prg);
+				argv++;
+				_nombre.replace (_nombre.begin (), _nombre.end (),
+						argv[0]);
+			} else
 				usage (prg);
 		else {
 			_salon.replace ( _salon.begin (), _salon.end (),
@@ -38,6 +47,11 @@ ArgParser::ArgParser (int argc, char **argv)
 
 	if (!room)
 		usage (prg);
+}
+
+const std::string& ArgParser::nombre () const
+{
+	return _nombre;
 }
 
 const std::string& ArgParser::salon () const

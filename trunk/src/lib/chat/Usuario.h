@@ -1,10 +1,13 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+class Usuario;
+
 #include <string>
 
 #include <chat/Salon.h>
 #include <chat/Message.h>
+#include <chat/TextMessage.h>
 
 class Usuario
 {
@@ -23,9 +26,9 @@ class Usuario
 			return nombre;
 		}
 
-		virtual void unirse (Salon *salon) = 0;
+		virtual void unirse (Salon *salon);
 		virtual void recibir (const Message& m) = 0;
-		virtual void enviar (const Message& m) = 0;
+		virtual void enviar (const TextMessage& m);
 };
 
 #endif

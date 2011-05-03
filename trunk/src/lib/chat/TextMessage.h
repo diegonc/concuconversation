@@ -11,12 +11,14 @@ class TextMessage : public Message
 		static const int MESSAGE_ID = 2;
 
 	private:
+		std::string name;
 		std::string text;
 
 	public:
-		TextMessage (const std::string& text);
+		TextMessage (const std::string& name, const std::string& text);
 
 		void write (OutputStream& stream) const;
+		std::string toString () const;
 };
 
 #endif

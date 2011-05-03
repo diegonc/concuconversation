@@ -17,6 +17,7 @@ class JoinMessage : public Message
 		JoinMessage (const std::string& name);
 
 		void write (OutputStream& stream) const;
+		std::string toString () const;
 };
 
 #endif

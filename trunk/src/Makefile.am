@@ -29,6 +29,8 @@ libSources = \
 	lib/system/SharedBuffer.h \
 	lib/system/System.cc \
 	lib/system/System.h \
+	lib/system/InitializedSemaphore.cc \
+	lib/system/InitializedSemaphore.h \
 	lib/utils/ArgParser.h \
 	lib/utils/ArgParser.cc \
 	lib/utils/NonCopyable.h

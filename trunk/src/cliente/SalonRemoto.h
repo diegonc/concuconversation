@@ -5,11 +5,13 @@
 
 #include <chat/Salon.h>
 #include <io/FifoOutputStream.h>
+#include <system/Semaphore.h>
 
 class SalonRemoto : public Salon
 {
 	private:
 		FifoOutputStream *fifo;
+		Semaphore *lock;
 
 		FifoOutputStream *iniciar (const std::string& salon);
 

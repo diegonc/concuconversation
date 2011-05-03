@@ -6,11 +6,13 @@
 
 SalonRemoto::SalonRemoto (const std::string& salon)
 {
-	fifo = iniciar (salon);	
+	fifo = iniciar (salon);
+	lock = new Semaphore (IPCName (salon.c_str(), 'L'), 1, 0600);
 }
 
 SalonRemoto::~SalonRemoto ()
 {
+	delete lock;
 	delete fifo;
 }
 
@@ -36,6 +38,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 		char *const argv[] = { "salon",
 			const_cast<char *> (salon.c_str ()), NULL };
 		System::spawn ("salon", argv);
+		/* TODO: limpiar en caso de error. */
 	} else if (err == -1 && errno != EEXIST) {
 		throw SystemErrorException ();
 	}

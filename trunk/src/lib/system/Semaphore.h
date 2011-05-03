@@ -7,14 +7,14 @@
 
 class Semaphore
 {
-	private:
+	protected:
 		int id;
-
-		void initialize (key_t, int, int);
+		const int nsems;
 
 	public:
-		Semaphore (key_t key, int nsems);
-		Semaphore (IPCName name, int nsems);
+		Semaphore (key_t key, int nsems, int flags);
+		Semaphore (IPCName name, int nsems, int flags);
+		virtual ~Semaphore ();
 
 		void set (int idx, int value);
 		void wait (int idx, int value = 1);

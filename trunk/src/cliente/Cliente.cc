@@ -28,7 +28,8 @@ void Cliente::run ()
 
 void Cliente::onInputLine (const std::string& text)
 {
-	// salon.post (TextMessage (text))
+	salon.post (TextMessage (usuario.getNombre (), text));
+	/* TODO: quitar cuando se lea el mensaje desde el salon. */
 	console.append (text);
 }
 

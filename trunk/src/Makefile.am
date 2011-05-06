@@ -23,6 +23,7 @@ libSources = \
 	lib/io/FifoOutputStream.h \
 	lib/io/InputStream.h \
 	lib/io/OutputStream.h \
+	lib/system/EventHandler.h \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \
@@ -31,6 +32,8 @@ libSources = \
 	lib/system/Semaphore.h \
 	lib/system/SharedBuffer.cc \
 	lib/system/SharedBuffer.h \
+	lib/system/SignalHandler.cc \
+	lib/system/SignalHandler.h \
 	lib/system/System.cc \
 	lib/system/System.h \
 	lib/system/InitializedSemaphore.cc \

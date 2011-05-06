@@ -7,7 +7,9 @@
 #include <system/SignalHandler.h>
 
 Cliente::Cliente (const ArgParser& args)
-	: console (*this),
+	: mensajes_pendientes (0),
+	  salida_requerida (0),
+	  console (*this),
 	  salon (args.salon ()),
 	  usuario (console, args.nombre ())
 {
@@ -27,7 +29,7 @@ void Cliente::run ()
 
 	do {
 		cause = console.run ();
-	} while (cause != ConsoleManager::EXIT_REQUESTED);
+	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
 }
 
 void Cliente::onInputLine (const std::string& text)
@@ -53,4 +55,8 @@ void Cliente::setupSignals ()
 
 void Cliente::handleSignal (int signum)
 {
+	if (signum == SIGINT)
+		salida_requerida = 1;
+	else if (signum == SIGUSR1)
+		mensajes_pendientes = 1;
 }

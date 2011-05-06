@@ -10,6 +10,9 @@
 class Cliente : public ConsoleListener, public EventHandler
 {
 	private:
+		volatile sig_atomic_t mensajes_pendientes;
+		volatile sig_atomic_t salida_requerida;
+
 		ConsoleManager console;
 		SalonRemoto salon;
 		UsuarioImpl usuario;

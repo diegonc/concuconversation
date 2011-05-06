@@ -6,6 +6,8 @@
 
 #include <curses.h>
 
+#include <signal.h>
+
 class ConsoleListener
 {
 	public:
@@ -23,6 +25,9 @@ class ConsoleManager
 
 	private:
 		ConsoleListener& listener;
+		/* TODO: mover a Cliente */
+		sigset_t mask;
+		/*************************/
 
 		int input_size;
 		WINDOW* msg;

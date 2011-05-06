@@ -16,6 +16,8 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	int nonblock = 1;
 	System::check (ioctl (fileno (stdin), FIONBIO, &nonblock));
 
+	sigemptyset (&mask);
+
 	/* Inicializacion de curses. */
 	initscr ();
 	cbreak ();
@@ -69,7 +71,7 @@ int ConsoleManager::next_char (WINDOW *w)
 		FD_ZERO (&fds);
 		FD_SET (ifd, &fds);
 
-		err = pselect (ifd +1, &fds, NULL, NULL, NULL, NULL);
+		err = pselect (ifd +1, &fds, NULL, NULL, NULL, &mask);
 
 		if (err == -1)
 			if (errno == EINTR)

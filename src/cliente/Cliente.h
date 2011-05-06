@@ -5,13 +5,16 @@
 #include <ConsoleManager.h>
 #include <SalonRemoto.h>
 #include <UsuarioImpl.h>
+#include <system/EventHandler.h>
 
-class Cliente : public ConsoleListener
+class Cliente : public ConsoleListener, public EventHandler
 {
 	private:
 		ConsoleManager console;
 		SalonRemoto salon;
 		UsuarioImpl usuario;
+
+		void setupSignals ();
 
 	public:
 		Cliente (const ArgParser& args);
@@ -20,6 +23,7 @@ class Cliente : public ConsoleListener
 		void run ();
 
 		void onInputLine (const std::string& text);
+		void handleSignal (int signum);
 };
 
 #endif

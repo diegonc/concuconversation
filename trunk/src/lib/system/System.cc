@@ -3,8 +3,13 @@
 #include <unistd.h>
 
 SystemErrorException::SystemErrorException () throw ()
+	: number (errno)
 {
-	this->number = errno;
+}
+
+SystemErrorException::SystemErrorException (int err) throw ()
+	: number (err)
+{
 }
 
 void System::spawn (const char *file, char *const argv[])

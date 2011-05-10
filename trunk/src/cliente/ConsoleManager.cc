@@ -120,8 +120,6 @@ enum ConsoleManager::cause ConsoleManager::run ()
 			waddch (input, '\b');
 			wdelch (input);
 		} else if (c == KEY_ENTER || c == '\n') {
-			input_buffer.push_back ('\n');
-
 			std::string text (input_buffer.begin(), input_buffer.end());
 
 			listener.onInputLine (text);

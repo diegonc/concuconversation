@@ -10,16 +10,22 @@ class Packet
 {
 	private:
 		std::vector<char> buffer;
+		int cursor;
 
 		void update_size ();
 
 	public:
 		Packet ();
 
-		void push (int i);
-		void push (const std::string& s);
+		void pushByte (char c);
+		void pushInt (int i);
+		void pushString (const std::string& s);
 
 		void write (OutputStream& stream);
+
+		void rewind ();
+		int readInt ();
+		std::string readString ();
 };
 
 #endif

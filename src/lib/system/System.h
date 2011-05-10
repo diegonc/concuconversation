@@ -13,6 +13,8 @@ class SystemErrorException : public std::exception
 
 	public:
 		SystemErrorException () throw ();
+		SystemErrorException (int err) throw ();
+
 		virtual ~SystemErrorException () throw () { }
 
 		virtual const char *what() const throw()

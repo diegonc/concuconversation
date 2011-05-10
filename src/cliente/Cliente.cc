@@ -29,6 +29,10 @@ void Cliente::run ()
 
 	do {
 		cause = console.run ();
+		if (mensajes_pendientes != 0) {
+			mensajes_pendientes = 0;
+			console.append ("SIGUSR1\n");
+		}
 	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
 }
 

@@ -6,6 +6,7 @@
 #include <ArgParser.h>
 #include <UsuarioRemoto.h>
 
+#include <chat/Message.h>
 #include <chat/MessageReader.h>
 #include <chat/MessageVisitor.h>
 #include <system/InitializedSemaphore.h>

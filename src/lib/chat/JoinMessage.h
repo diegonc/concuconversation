@@ -19,14 +19,19 @@ class JoinMessage : public Message
 	private:
 		std::string name;
 		pid_t pid;
-		/*IPCName acknowledgedMessages; */
+		std::string ipcNamespace;
 
 	public:
-		JoinMessage (const std::string& name);
+		JoinMessage (const std::string& name, pid_t pid, const std::string& ipcNamespace);
 		JoinMessage (Packet &pkt);
 
 		const std::string& getNombre () const { return name; }
 		const pid_t getPID () const { return pid; }
+		const std::string& getNamespace () const
+		{
+		       return ipcNamespace;
+		}
+
 
 		void write (OutputStream& stream) const;
 		std::string toString () const;

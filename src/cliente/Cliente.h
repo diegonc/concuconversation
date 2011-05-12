@@ -4,7 +4,6 @@
 #include <ArgParser.h>
 #include <ConsoleManager.h>
 #include <SalonRemoto.h>
-#include <UsuarioImpl.h>
 #include <system/EventHandler.h>
 
 class Cliente : public ConsoleListener, public EventHandler
@@ -15,7 +14,7 @@ class Cliente : public ConsoleListener, public EventHandler
 
 		ConsoleManager console;
 		SalonRemoto salon;
-		UsuarioImpl usuario;
+		std::string name;
 
 		void setupSignals ();
 

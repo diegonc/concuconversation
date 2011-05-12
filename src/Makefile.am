@@ -17,12 +17,8 @@ libSources = \
 	lib/chat/PacketReader.h \
 	lib/chat/QuitMessage.cc \
 	lib/chat/QuitMessage.h \
-	lib/chat/Salon.cc \
-	lib/chat/Salon.h \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
-	lib/chat/Usuario.cc \
-	lib/chat/Usuario.h \
 	lib/io/FifoInputStream.cc \
 	lib/io/FifoInputStream.h \
 	lib/io/FifoOutputStream.cc \
@@ -55,8 +51,6 @@ clienteSources = \
 	cliente/ConsoleManager.h \
 	cliente/SalonRemoto.cc \
 	cliente/SalonRemoto.h \
-	cliente/UsuarioImpl.cc \
-	cliente/UsuarioImpl.h \
 	cliente/main.cc
 
 salonSources = \

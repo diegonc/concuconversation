@@ -11,9 +11,10 @@ Cliente::Cliente (const ArgParser& args)
 	  salida_requerida (0),
 	  console (*this),
 	  salon (args.salon ()),
-	  usuario (console, args.nombre ())
+	  name (args.nombre ())/*,
+	  usuario (console)*/
 {
-	usuario.unirse (&salon);
+	salon.join (name, getpid (), "" /* usuario.getNamespace () */);
 }
 
 Cliente::~Cliente ()
@@ -38,7 +39,7 @@ void Cliente::run ()
 
 void Cliente::onInputLine (const std::string& text)
 {
-	salon.post (TextMessage (usuario.getNombre (), text));
+	salon.post (TextMessage (name, text));
 	/* TODO: quitar cuando se lea el mensaje desde el salon. */
 	console.append (text);
 }

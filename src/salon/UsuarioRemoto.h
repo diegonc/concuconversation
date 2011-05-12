@@ -3,10 +3,10 @@
 
 #include <unistd.h>
 
-#include <chat/Usuario.h>
+#include <chat/Message.h>
 #include <system/SharedVariable.h>
 
-class UsuarioRemoto : public Usuario
+class UsuarioRemoto
 {
 	pid_t owner;
 	/* SharedVariable<off_t> proximaLectura; */

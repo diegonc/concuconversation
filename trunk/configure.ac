@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.68])
-AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_PREREQ([2.54])
+AC_INIT([concuconversation], [1.0.0], [BUG-REPORT-ADDRESS])
 AC_CONFIG_SRCDIR([src/lib/System.cc])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE

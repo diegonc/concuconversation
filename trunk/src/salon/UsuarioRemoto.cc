@@ -5,8 +5,7 @@
 #include <signal.h>
 
 UsuarioRemoto::UsuarioRemoto (const std::string& name, pid_t owner)
-	: Usuario (name),
-	  owner (owner)
+	: owner (owner)
 {
 }
 

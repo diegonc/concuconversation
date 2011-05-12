@@ -52,15 +52,15 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	return new FifoOutputStream (salon);
 }
 
-void SalonRemoto::join (Usuario& u)
+void SalonRemoto::join (const std::string& name, pid_t pid, const std::string& ipcNamespace)
 {
-	JoinMessage msg (u.getNombre ());
+	JoinMessage msg (name, pid, ipcNamespace);
 	doPost (msg);
 }
 
-void SalonRemoto::quit (Usuario& u)
+void SalonRemoto::quit (const std::string& name)
 {
-	QuitMessage msg(u.getNombre ());
+	QuitMessage msg(name);
 	doPost (msg);
 }
 

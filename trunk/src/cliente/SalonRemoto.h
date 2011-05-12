@@ -4,13 +4,11 @@
 #include <string>
 
 #include <chat/Message.h>
-#include <chat/Salon.h>
 #include <chat/TextMessage.h>
-#include <chat/Usuario.h>
 #include <io/FifoOutputStream.h>
 #include <system/Semaphore.h>
 
-class SalonRemoto : public Salon
+class SalonRemoto
 {
 	private:
 		FifoOutputStream *fifo;
@@ -24,8 +22,8 @@ class SalonRemoto : public Salon
 		SalonRemoto (const std::string& salon);
 		virtual ~SalonRemoto ();
 
-		virtual void join (Usuario& u);
-		virtual void quit (Usuario& u);
+		virtual void join (const std::string& name, pid_t pid, const std::string& ipcNamespace);
+		virtual void quit (const std::string& name);
 		virtual void post (const TextMessage& msg);
 };
 

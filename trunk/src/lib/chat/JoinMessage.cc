@@ -4,9 +4,10 @@
 #include <chat/JoinMessage.h>
 #include <chat/Packet.h>
 
-JoinMessage::JoinMessage (const std::string& name)
+JoinMessage::JoinMessage (const std::string& name, pid_t pid, const std::string& ipcNamespace)
 	: name (name),
-	  pid ( getpid ())
+	  pid (pid),
+	  ipcNamespace (ipcNamespace)
 {
 }
 
@@ -17,7 +18,7 @@ JoinMessage::JoinMessage (Packet &pkt)
 
 	pid = pkt.readInt ();
 	name = pkt.readString ();
-
+	ipcNamespace = pkt.readString ();
 }
 
 void JoinMessage::write (OutputStream& stream) const
@@ -27,6 +28,7 @@ void JoinMessage::write (OutputStream& stream) const
 	pkt.pushInt (JoinMessage::MESSAGE_ID);
 	pkt.pushInt (pid);
 	pkt.pushString (name);
+	pkt.pushString (ipcNamespace);
 
 	pkt.write (stream);
 }

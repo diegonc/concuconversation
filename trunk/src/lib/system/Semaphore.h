@@ -18,6 +18,8 @@ class Semaphore
 		Semaphore (IPCName name, int nsems, int flags);
 		virtual ~Semaphore ();
 
+		void initialize ();
+
 		void set (int idx, int value);
 		void wait (int idx = 0, int value = 1);
 		void signal (int idx = 0, int value = 1);

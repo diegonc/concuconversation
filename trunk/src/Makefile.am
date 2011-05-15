@@ -30,8 +30,6 @@ libSources = \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \
 	lib/system/IPCName.h \
-	lib/system/InitializedSemaphore.cc \
-	lib/system/InitializedSemaphore.h \
 	lib/system/Semaphore.cc \
 	lib/system/Semaphore.h \
 	lib/system/SharedBuffer.cc \

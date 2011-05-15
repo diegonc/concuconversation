@@ -9,6 +9,7 @@
 #include <chat/Message.h>
 #include <chat/MessageReader.h>
 #include <chat/MessageVisitor.h>
+#include <system/FileUnlinker.h>
 #include <system/Semaphore.h>
 
 class SalonServer : public MessageVisitor
@@ -19,6 +20,8 @@ class SalonServer : public MessageVisitor
 
 		typedef std::map<std::string, UsuarioRemoto *> MapUsuarios;
 		MapUsuarios usuarios;
+
+		FileUnlinker roomUnlinker;
 
 	public:
 		SalonServer (const ArgParser &args);

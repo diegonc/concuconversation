@@ -14,6 +14,7 @@ SalonServer::SalonServer (const ArgParser &args)
 		new MessageFactory ())
 {
 	/* Permite a los clientes comenzar a escribir. */
+	lockForWriters.initialize ();
 	lockForWriters.signal ();
 }
 

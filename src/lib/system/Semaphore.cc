@@ -28,6 +28,12 @@ Semaphore::~Semaphore ()
 	semctl (id, 0, IPC_RMID);
 }
 
+void Semaphore::initialize ()
+{
+	for (int i=0; i < nsems; i++)
+		set (i, 0);
+}
+
 void Semaphore::set (int idx, int value)
 {
 	union  semun {

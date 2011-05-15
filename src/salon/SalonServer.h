@@ -9,12 +9,12 @@
 #include <chat/Message.h>
 #include <chat/MessageReader.h>
 #include <chat/MessageVisitor.h>
-#include <system/InitializedSemaphore.h>
+#include <system/Semaphore.h>
 
 class SalonServer : public MessageVisitor
 {
 	private:
-		InitializedSemaphore lockForWriters;
+		Semaphore lockForWriters;
 		MessageReader messages;
 
 		typedef std::map<std::string, UsuarioRemoto *> MapUsuarios;

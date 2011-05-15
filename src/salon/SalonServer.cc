@@ -11,7 +11,8 @@ SalonServer::SalonServer (const ArgParser &args)
 	: lockForWriters (IPCName (args.salon ().c_str (), 'L'), 1,
 		0666 | IPC_CREAT | IPC_EXCL),
 	  messages (new PacketReader (new FifoInputStream (args.salon ())),
-		new MessageFactory ())
+		new MessageFactory ()),
+	  roomUnlinker (args.salon ())
 {
 	/* Permite a los clientes comenzar a escribir. */
 	lockForWriters.initialize ();

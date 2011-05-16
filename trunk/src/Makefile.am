@@ -67,6 +67,5 @@ cliente_cliente_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cliente
 cliente_cliente_LDADD = -lncurses
 
 salon_salon_SOURCES = $(salonSources) $(libSources)
-salon_salon_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/salon
-
-
+salon_salon_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/salon $(LOG4CXX_CFLAGS)
+salon_salon_LDADD = $(LOG4CXX_LIBS)

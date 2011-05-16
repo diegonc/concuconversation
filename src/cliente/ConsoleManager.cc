@@ -15,7 +15,6 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	/* XXX: estupido curses, gracias por simular SA_RESTART... */
 	int nonblock = 1;
 	System::check (ioctl (fileno (stdin), FIONBIO, &nonblock));
-
 	sigemptyset (&mask);
 
 	/* Inicializacion de curses. */
@@ -97,7 +96,7 @@ enum ConsoleManager::cause ConsoleManager::run ()
 			break;
 		}
 
-		wprintw (msg, "key: %s (%d)\n", keyname(c), c);
+		//wprintw (msg, "key: %s (%d)\n", keyname(c), c);
 		wnoutrefresh (msg);
 
 		if (escaped) {

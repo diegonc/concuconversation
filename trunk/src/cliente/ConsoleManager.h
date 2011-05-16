@@ -30,8 +30,10 @@ class ConsoleManager
 		/*************************/
 
 		int input_size;
+		int log_size;
 		WINDOW* msg;
 		WINDOW* input;
+		WINDOW* logging;
 		std::vector<char> input_buffer;
 
 		int next_char (WINDOW *w);
@@ -43,6 +45,9 @@ class ConsoleManager
 		enum cause run ();
 
 		void append (const std::string& msg);
+		void refresh ();
+
+		WINDOW *getLoggingWindow ();
 };
 
 #endif

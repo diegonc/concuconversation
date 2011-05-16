@@ -15,6 +15,9 @@ AC_CONFIG_HEADERS([src/config.h])
 AC_PROG_CXX
 AC_PROG_CC
 
+# Check for pkg-config compatible modules.
+PKG_CHECK_MODULES([LOG4CXX], [liblog4cxx])
+
 # Checks for libraries.
 #AC_CHECK_LIB([ncurses], [initscr])
 

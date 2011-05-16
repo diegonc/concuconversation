@@ -54,7 +54,7 @@ Cliente::Cliente (const ArgParser& args)
 	  salon (args.salon ())
 {
 	messageLock.initialize();
-	messageLock.set(0,0);
+	messageLock.set(0,1);
 	messageLock.set(1,0);
 
 	LOG4CXX_DEBUG(logger, "Join salon [" << args.salon() << "] with name [" << args.nombre() << "].");
@@ -75,11 +75,11 @@ void Cliente::run ()
 	if (pid==0){
 		LOG4CXX_DEBUG(logger, "Lanzando fork lector");
 		while (1){
-			messageLock.signal(0,1);
 			LOG4CXX_DEBUG(logger, "Esperando mensaje");
 			messageLock.wait(1,1);
 			message.get().accept(*this);
 			LOG4CXX_DEBUG(logger, "Mensaje recibido");
+			messageLock.signal(0,1);
 		}
 	}else{
 		LOG4CXX_DEBUG(logger, "Lanzando fork escritor");

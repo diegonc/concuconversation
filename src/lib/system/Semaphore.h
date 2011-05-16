@@ -5,11 +5,14 @@
 #include <sys/types.h>
 #include <sys/sem.h>
 
+#include <log4cxx/logger.h>
 #include <system/IPCName.h>
 
 class Semaphore
 {
-	protected:
+	private:
+		static log4cxx::LoggerPtr logger;
+
 		int id;
 		const int nsems;
 

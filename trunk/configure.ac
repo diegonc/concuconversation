@@ -6,6 +6,7 @@ AC_INIT([concuconversation], [1.0.0], [BUG-REPORT-ADDRESS])
 AC_CONFIG_SRCDIR([src/lib/system/System.cc])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 AC_CONFIG_HEADERS([src/config.h])
 

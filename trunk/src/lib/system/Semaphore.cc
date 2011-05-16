@@ -72,18 +72,22 @@ void Semaphore::wait (int idx, int value)
 	ops.sem_op = -value;
 	ops.sem_flg = 0;
 	
-	bool retry = false;
+	bool retry;
 	do {
 		LOG4CXX_DEBUG(logger,
 			"wait semaphore set:" << id
 		       	<< " index:" << idx
 			<< " value:" << value);
 
+		retry = false;
+
 		int ret = semop (id, &ops, 1);
 		if (ret == -1)
 			if (errno == EINTR)
+			{
+				LOG4CXX_DEBUG(logger, "wait interrupted.");
 				retry = true;
-			else
+			} else
 				throw SystemErrorException ();
 	} while (retry);
 }

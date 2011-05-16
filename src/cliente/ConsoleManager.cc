@@ -158,6 +158,7 @@ WINDOW *ConsoleManager::getLoggingWindow ()
 {
 	if (!logging) {
 		logging = newwin (log_size, COLS, 0, 0);
+		scrollok (logging, TRUE);
 	}
 	return logging;
 }

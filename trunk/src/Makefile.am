@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CXXFLAGS = -O0 -g
+AM_CXXFLAGS = -O0 -g 
 AM_CPPFLAGS = -I$(srcdir)/lib
 
 libSources = \
@@ -63,8 +63,8 @@ salonSources = \
 bin_PROGRAMS = cliente/cliente salon/salon
 
 cliente_cliente_SOURCES = $(clienteSources) $(libSources)
-cliente_cliente_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cliente
-cliente_cliente_LDADD = -lncurses
+cliente_cliente_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cliente $(LOG4CXX_CFLAGS)
+cliente_cliente_LDADD = -lncurses $(LOG4CXX_LIBS)
 
 salon_salon_SOURCES = $(salonSources) $(libSources)
 salon_salon_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/salon $(LOG4CXX_CFLAGS)

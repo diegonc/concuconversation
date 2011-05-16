@@ -25,5 +25,6 @@ void UsuarioRemoto::recibir(const Message& msg)
 	sleep(3);
 	message.set(msg);
 	lock.signal(1,1);
+	kill(owner, SIGUSR1);
 	LOG4CXX_DEBUG(logger, "mensaje enviado a " << name);
 }

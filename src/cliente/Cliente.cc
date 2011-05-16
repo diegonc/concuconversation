@@ -71,26 +71,18 @@ void Cliente::run ()
 
 	setupSignals ();
 
-	pid_t pid= fork();
-	if (pid==0){
-		LOG4CXX_DEBUG(logger, "Lanzando fork lector");
-		while (1){
+	do {
+		cause = console.run ();
+		if (mensajes_pendientes != 0) {
+			mensajes_pendientes = 0;
+
 			LOG4CXX_DEBUG(logger, "Esperando mensaje");
 			messageLock.wait(1,1);
 			message.get().accept(*this);
 			LOG4CXX_DEBUG(logger, "Mensaje recibido");
 			messageLock.signal(0,1);
 		}
-	}else{
-		LOG4CXX_DEBUG(logger, "Lanzando fork escritor");
-		do {
-			cause = console.run ();
-			if (mensajes_pendientes != 0) {
-				mensajes_pendientes = 0;
-				//console.append ("SIGUSR1\n");
-			}
-		} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
-	}
+	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
 }
 
 void Cliente::onInputLine (const std::string& text)

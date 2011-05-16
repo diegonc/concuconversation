@@ -2,6 +2,7 @@
 #define ARGPARSER_H
 
 #include <string>
+#include <iostream>
 
 class ArgParser
 {

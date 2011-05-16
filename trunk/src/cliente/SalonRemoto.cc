@@ -5,11 +5,15 @@
 #include <chat/JoinMessage.h>
 #include <chat/QuitMessage.h>
 #include <system/System.h>
+#include <iostream>
 
 SalonRemoto::SalonRemoto (const std::string& salon)
 {
+	std::cout << "Creando el salon remoto" << std::endl;
 	fifo = iniciar (salon);
+	std::cout << "Paso el fifo" << std::endl;
 	lock = new Semaphore (IPCName (salon.c_str(), 'L'), 1, 0600);
+	std::cout << "Paso el lock" << std::endl;
 }
 
 SalonRemoto::~SalonRemoto ()
@@ -30,7 +34,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	 * salón.
 	 */
 	err = mkfifo (salon.c_str (), 0666);
-
+	std::cout << "Cree el fifo " << err  << "|" << errno << std::endl;
 	/*
 	 * Si el fifo no existía se inicia el proceso que administrará
 	 * la conversación y que contiene el objeto Salon al que este
@@ -39,7 +43,8 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	if (err == 0) {
 		char *const argv[] = { "salon",
 			const_cast<char *> (salon.c_str ()), NULL };
-		System::spawn ("salon", argv);
+		std::cout << "lanzando salon con parametros " << argv << std::endl;
+		System::spawn ("../salon/salon", argv);
 		/* TODO: limpiar en caso de error. */
 	} else if (err == -1 && errno != EEXIST) {
 		throw SystemErrorException ();

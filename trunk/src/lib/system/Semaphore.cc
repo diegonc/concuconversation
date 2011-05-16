@@ -4,17 +4,19 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+#include <iostream>
 
 #include <system/Semaphore.h>
 #include <system/System.h>
 
 Semaphore::Semaphore (IPCName name, int nsems, int flags) : nsems (nsems)
 {
+	std::cout << "initializing [" << nsems <<"] semaphores with params [" << name.path << "] [" << name.index << "]." << std::endl;
 	key_t token = ftok (name.path, name.index);
 	System::check (token);
-
 	id = semget (token, nsems, flags);
 	System::check (id);
+	std::cout << "Semaphore created: " << id << std::endl;
 }
 
 Semaphore::Semaphore (key_t key, int nsems, int flags) : nsems (nsems)
@@ -30,6 +32,7 @@ Semaphore::~Semaphore ()
 
 void Semaphore::initialize ()
 {
+	std::cout << "initializing semaphore" << id << std::endl;
 	for (int i=0; i < nsems; i++)
 		set (i, 0);
 }
@@ -43,6 +46,7 @@ void Semaphore::set (int idx, int value)
 	} arg;
 
 	arg.val = value;
+	std::cout << "set semaphore " << id << " value" << idx << value << std::endl;
 	semctl (id, idx, SETVAL, arg);
 }
 
@@ -59,6 +63,7 @@ void Semaphore::wait (int idx, int value)
 	
 	bool retry = false;
 	do {
+		std::cout << "wait semaphore " << id << " value" << idx << value << std::endl;
 		int ret = semop (id, &ops, 1);
 		if (ret == -1)
 			if (errno == EINTR)
@@ -78,6 +83,6 @@ void Semaphore::signal (int idx, int value)
 	ops.sem_num = idx;
 	ops.sem_op = value;
 	ops.sem_flg = 0;
-
+	std::cout << "signal semaphore " << id << " value" << idx << value << std::endl;
 	System::check (semop (id, &ops, 1));
 }

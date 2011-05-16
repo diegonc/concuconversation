@@ -5,8 +5,11 @@
 #include <ConsoleManager.h>
 #include <SalonRemoto.h>
 #include <system/EventHandler.h>
+#include <chat/Message.h>
+#include <system/SharedVariable.h>
+#include <system/Semaphore.h>
 
-class Cliente : public ConsoleListener, public EventHandler
+class Cliente : public ConsoleListener, public EventHandler, public MessageVisitor
 {
 	private:
 		volatile sig_atomic_t mensajes_pendientes;
@@ -15,6 +18,9 @@ class Cliente : public ConsoleListener, public EventHandler
 		ConsoleManager console;
 		SalonRemoto salon;
 		std::string name;
+
+		Semaphore messageLock;
+		SharedVariable<Message> message;
 
 		void setupSignals ();
 
@@ -26,6 +32,10 @@ class Cliente : public ConsoleListener, public EventHandler
 
 		void onInputLine (const std::string& text);
 		void handleSignal (int signum);
+
+		void visit (const JoinMessage& msg);
+		void visit (const QuitMessage& msg);
+		void visit (const TextMessage& msg);
 };
 
 #endif

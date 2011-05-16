@@ -7,8 +7,12 @@
 namespace {
 	std::string usage (const char *prg)
 	{
-		/* TODO ...*/
-		throw std::runtime_error ("Invalid arguments.");
+		std::cout << std::endl;
+		std::cout << "salon [-d] file" << std::endl;
+		std::cout << std::endl;
+		std::cout << "	-d option for debug mode." << std::endl;
+		std::cout << "	file where place the conversation." << std::endl;
+		//throw std::runtime_error ("Invalid arguments.");
 	}
 }
 

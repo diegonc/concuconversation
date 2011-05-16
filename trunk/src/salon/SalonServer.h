@@ -15,6 +15,7 @@
 class SalonServer : public MessageVisitor
 {
 	private:
+		std::string salonName;
 		Semaphore lockForWriters;
 		MessageReader messages;
 

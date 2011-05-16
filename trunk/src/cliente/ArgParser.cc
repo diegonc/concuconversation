@@ -7,7 +7,7 @@
 namespace {
 	std::string usage (const char *prg)
 	{
-		/* TODO ...*/
+		/* TODO */
 		throw std::runtime_error ("Invalid arguments.");
 	}
 }

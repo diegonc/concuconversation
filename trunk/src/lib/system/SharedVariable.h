@@ -9,6 +9,7 @@
 
 #include <system/IPCName.h>
 #include <system/System.h>
+#include <iostream>
 
 template <typename T>
 class SharedVariable : private NonCopyable
@@ -21,7 +22,7 @@ class SharedVariable : private NonCopyable
 		SharedVariable (IPCName name, int flags);
 		~SharedVariable ();
 
-				void set (T t) { *ptr = t; }
+				void set (const T& t) { *ptr = t; }
 				const T& get () { return *ptr; }
 
 };
@@ -29,6 +30,7 @@ class SharedVariable : private NonCopyable
 template <typename T>
 SharedVariable<T>::SharedVariable (IPCName name, int flags)
 {
+	std::cout << "Creatin SharedVariable from [" << name.path << "] [" << name.index << "]" << std::endl;
 	key_t token = ftok (name.path, name.index);
 	System::check (token);
 

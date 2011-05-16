@@ -5,16 +5,18 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-#include <utils/NonCopyable.h>
+#include <log4cxx/logger.h>
 
 #include <system/IPCName.h>
 #include <system/System.h>
-#include <iostream>
+#include <utils/NonCopyable.h>
 
 template <typename T>
 class SharedVariable : private NonCopyable
 {
 	private:
+		static log4cxx::LoggerPtr logger;
+
 		int id;
 		T *ptr;
 
@@ -28,9 +30,15 @@ class SharedVariable : private NonCopyable
 };
 
 template <typename T>
+log4cxx::LoggerPtr SharedVariable<T>::logger (
+	log4cxx::Logger::getLogger ("SharedVariable"));
+
+template <typename T>
 SharedVariable<T>::SharedVariable (IPCName name, int flags)
 {
-	std::cout << "Creatin SharedVariable from [" << name.path << "] [" << name.index << "]" << std::endl;
+	LOG4CXX_DEBUG(logger, "Creating SharedVariable from ["
+		<< name.path << "] [" << name.index << "]");
+
 	key_t token = ftok (name.path, name.index);
 	System::check (token);
 
@@ -53,4 +61,3 @@ SharedVariable<T>::~SharedVariable ()
 }
 
 #endif
-

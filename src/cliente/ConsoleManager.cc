@@ -8,6 +8,7 @@
 
 ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	: input_size (4),
+	  log_size (8),
 	  listener (listener)
 {
 	//trace (TRACE_MAXIMUM);
@@ -25,7 +26,7 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	/* 0          0,COLS
 	 * +----------+
 	 * |          |
-	 * |          |
+	 * |----------| log_size (Overlapping window)
 	 * |          |
 	 * |          |
 	 * +----------+ LINES - input_size
@@ -38,10 +39,15 @@ ConsoleManager::ConsoleManager (ConsoleListener& listener)
 	scrollok (msg, TRUE);
 	input = newwin (input_size, COLS, LINES - input_size, 0);
 	keypad (input, TRUE);
+
+	logging = NULL;
 }
 
 ConsoleManager::~ConsoleManager ()
 {
+	if (logging)
+		delwin (logging);
+
 	delwin (msg);
 	delwin (input);
 	endwin ();
@@ -136,7 +142,22 @@ enum ConsoleManager::cause ConsoleManager::run ()
 void ConsoleManager::append (const std::string& msg)
 {
 	waddstr (this->msg, msg.c_str ());
-	wnoutrefresh (this->msg);
-	wnoutrefresh (this->input);
+	this->refresh ();
+}
+
+void ConsoleManager::refresh ()
+{
+	wnoutrefresh (msg);
+	if (logging)
+		wnoutrefresh (logging);
+	wnoutrefresh (input);
 	doupdate ();
+}
+
+WINDOW *ConsoleManager::getLoggingWindow ()
+{
+	if (!logging) {
+		logging = newwin (log_size, COLS, 0, 0);
+	}
+	return logging;
 }

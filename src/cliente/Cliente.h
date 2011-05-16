@@ -9,6 +9,13 @@
 #include <system/SharedVariable.h>
 #include <system/Semaphore.h>
 
+class LoggingInitialization
+{
+	friend class Cliente;
+	WINDOW *wnd;
+	LoggingInitialization (ConsoleManager& cm, const ArgParser& args);
+};
+
 class Cliente : public ConsoleListener, public EventHandler, public MessageVisitor
 {
 	private:
@@ -16,6 +23,7 @@ class Cliente : public ConsoleListener, public EventHandler, public MessageVisit
 		volatile sig_atomic_t salida_requerida;
 
 		ConsoleManager console;
+		LoggingInitialization loginit;
 		SalonRemoto salon;
 		std::string name;
 

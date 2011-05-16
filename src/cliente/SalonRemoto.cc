@@ -7,13 +7,19 @@
 #include <system/System.h>
 #include <iostream>
 
+#include <log4cxx/logger.h>
+
+namespace {
+	log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger ("SalonRemoto"));
+}
+
 SalonRemoto::SalonRemoto (const std::string& salon)
 {
-	std::cout << "Creando el salon remoto" << std::endl;
+	LOG4CXX_DEBUG(logger, "Creando el salon remoto");
 	fifo = iniciar (salon);
-	std::cout << "Paso el fifo" << std::endl;
+	LOG4CXX_DEBUG(logger, "Paso el fifo");
 	lock = new Semaphore (IPCName (salon.c_str(), 'L'), 1, 0600);
-	std::cout << "Paso el lock" << std::endl;
+	LOG4CXX_DEBUG(logger, "Paso el lock");
 }
 
 SalonRemoto::~SalonRemoto ()
@@ -34,7 +40,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	 * salón.
 	 */
 	err = mkfifo (salon.c_str (), 0666);
-	std::cout << "Cree el fifo " << err  << "|" << errno << std::endl;
+	LOG4CXX_DEBUG(logger, "Cree el fifo " << err << " | " << errno);
 	/*
 	 * Si el fifo no existía se inicia el proceso que administrará
 	 * la conversación y que contiene el objeto Salon al que este
@@ -43,7 +49,7 @@ FifoOutputStream* SalonRemoto::iniciar (const std::string& salon)
 	if (err == 0) {
 		char *const argv[] = { "salon",
 			const_cast<char *> (salon.c_str ()), NULL };
-		std::cout << "lanzando salon con parametros " << argv << std::endl;
+		LOG4CXX_DEBUG(logger, "lanzando salon con parametros " << argv);
 		System::spawn ("../salon/salon", argv);
 		/* TODO: limpiar en caso de error. */
 	} else if (err == -1 && errno != EEXIST) {

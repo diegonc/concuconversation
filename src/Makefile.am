@@ -49,6 +49,8 @@ clienteSources = \
 	cliente/ConsoleManager.h \
 	cliente/SalonRemoto.cc \
 	cliente/SalonRemoto.h \
+	cliente/log4cxx/CursesAppender.cc \
+	cliente/log4cxx/CursesAppender.h \
 	cliente/main.cc
 
 salonSources = \

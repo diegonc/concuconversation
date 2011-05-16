@@ -26,7 +26,7 @@ class JoinMessage : public Message
 		JoinMessage (Packet &pkt);
 
 		const std::string& getNombre () const { return name; }
-		const pid_t getPID () const { return pid; }
+		pid_t getPID () const { return pid; }
 		const std::string& getNamespace () const
 		{
 		       return ipcNamespace;

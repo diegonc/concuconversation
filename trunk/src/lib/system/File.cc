@@ -1,28 +1,28 @@
 #include <system/File.h>
-#include <string.h>
-#include <system/System.h>
-
-log4cxx::LoggerPtr File::logger (log4cxx::Logger::getLogger ("File"));
 
 File::File (const std::string &path, int flags)
 {
-	inicializar (path.c_str(), flags);
+	inicializar (path.c_str(), flags, 0);
+}
+
+File::File (const std::string &path, int flags, mode_t mode)
+{
+	inicializar (path.c_str(), flags, mode);
 }
 
 File::File (const char *path, int flags)
 {
-	inicializar (path, flags);
+	inicializar (path, flags, 0);
 }
 
-void File::inicializar (const char *path, int flags)
+File::File (const char *path, int flags, mode_t mode)
 {
-	LOG4CXX_DEBUG(logger,"Creando un pipe " << path );
-	strcpy ( this->nombre,nombre );
-		// se crea el fifo
-	int result= mknod ( nombre,S_IFIFO|0666,0 );
-		// se inicializa el descriptor en -1
-	System::check(result);
-	fd = open (path, flags);
+	inicializar (path, flags, mode);
+}
+
+void File::inicializar (const char *path, int flags, mode_t mode)
+{
+	fd = open (path, flags, mode);
 	/* TODO: errores */
 }
 
@@ -30,7 +30,6 @@ File::~File()
 {
 	if (fd != -1)
 		close (fd);
-	unlink(this->nombre);
 }
 
 int File::write (size_t n, const char *data)

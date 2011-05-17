@@ -49,9 +49,9 @@ Cliente::Cliente (const ArgParser& args)
 	  console (*this),
 	  loginit (console, args),
 	  name (args.nombre ()),
-	  message(IPCName("cliente",getpid()),0666 | IPC_CREAT),
-	  messageLock(IPCName("cliente",getpid()),2,0666 | IPC_CREAT),
-	  salon (args.salon ())
+	  salon (args.salon ()),
+	  messageLock(IPCName(args.salon().c_str(),getpid()),2,0666 | IPC_CREAT),
+	  message(IPCName(args.salon().c_str(),getpid()),0666 | IPC_CREAT)
 {
 	messageLock.initialize();
 	LOG4CXX_DEBUG(logger, "Join salon [" << args.salon() << "] with name [" << args.nombre() << "].");

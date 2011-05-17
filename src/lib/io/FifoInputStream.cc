@@ -17,25 +17,26 @@ FifoInputStream::FifoInputStream (const std::string &path)
 
 void FifoInputStream::read (size_t n, char *data)
 {
-	LOG4CXX_DEBUG(logger,"faltan ?" << n );
+	LOG4CXX_DEBUG(logger, "leyendo " << n << " bytes." );
 	ssize_t ret;
 	int attempts = 5;
-	while (attempts-- > 0 && n > 0) {
-		do {
-			ret = fifo.read (n, data);
+	
+	do {
+		ret = fifo.read (n, data);
+		LOG4CXX_DEBUG(logger, "..leidos: " << ret
+			<< "(errno: " << errno << ")");
 
-			if (ret == -1 && errno != EINTR){
-				throw SystemErrorException();
-			}
-			LOG4CXX_DEBUG(logger,"ret " << ret  << "errno " << errno);
+		if (ret == -1 && errno != EINTR){
+			throw SystemErrorException();
+		}
 
-			n -= ret;
-			data += ret;
-		} while (n > 0 && ret != 0 );
-	}
+		n -= ret;
+		data += ret;
+	} while (n > 0 && ret != 0 );
 
-	if (n > 0){
-		LOG4CXX_DEBUG(logger,"faltan ?" << n );
+	if (n > 0 && ret == 0) {
+		/* eof */
+		LOG4CXX_DEBUG(logger,"..todos los clientes salieron");
 		throw std::runtime_error (std::string("TODO: crear excepcion. (") + __PRETTY_FUNCTION__ + ")");
 	}
 }

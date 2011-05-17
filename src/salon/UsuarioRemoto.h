@@ -3,15 +3,14 @@
 
 #include <unistd.h>
 
-#include <chat/Message.h>
-#include <system/SharedVariable.h>
+#include <chat/SharedMessage.h>
 #include <system/Semaphore.h>
 
 class UsuarioRemoto
 {
 	pid_t owner;
 	std::string name;
-	SharedVariable<Message> message;
+	SharedMessage message;
 	Semaphore lock;
 
 	public:

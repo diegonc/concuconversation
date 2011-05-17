@@ -5,8 +5,7 @@
 #include <ConsoleManager.h>
 #include <SalonRemoto.h>
 #include <system/EventHandler.h>
-#include <chat/Message.h>
-#include <system/SharedVariable.h>
+#include <chat/SharedMessage.h>
 #include <system/Semaphore.h>
 
 class LoggingInitialization
@@ -26,8 +25,7 @@ class Cliente : public ConsoleListener, public EventHandler, public MessageVisit
 		std::string name;
 		SalonRemoto salon;
 		Semaphore messageLock;
-		SharedVariable<Message> message;
-
+		SharedMessage message;
 
 		void setupSignals ();
 

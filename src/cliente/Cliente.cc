@@ -75,7 +75,7 @@ void Cliente::run ()
 			mensajes_pendientes = 0;
 
 			LOG4CXX_DEBUG(logger, "Esperando mensaje");
-			message.get().accept(*this);
+			message.get()->accept(*this);
 			LOG4CXX_DEBUG(logger, "Mensaje recibido");
 			messageLock.signal(0,1);
 		}

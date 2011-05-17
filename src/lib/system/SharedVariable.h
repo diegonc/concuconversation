@@ -25,7 +25,7 @@ class SharedVariable : private NonCopyable
 		~SharedVariable ();
 
 				void set (const T& t) { *ptr = t; }
-				const T& get () { return *ptr; }
+				T& get () { return *ptr; }
 
 };
 

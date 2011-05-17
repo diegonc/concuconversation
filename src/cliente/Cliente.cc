@@ -67,9 +67,18 @@ void Cliente::run ()
 	ConsoleManager::cause cause;
 
 	setupSignals ();
+	messageLock.signal (0, 1);
 
 	do {
 		cause = console.run ();
+		if (mensajes_pendientes != 0) {
+			mensajes_pendientes = 0;
+
+			LOG4CXX_DEBUG(logger, "Esperando mensaje");
+			message.get().accept(*this);
+			LOG4CXX_DEBUG(logger, "Mensaje recibido");
+			messageLock.signal(0,1);
+		}
 	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
 }
 
@@ -93,7 +102,6 @@ void Cliente::setupSignals ()
 	SignalHandler& sig = SignalHandler::getInstance ();
 	sig.registrarHandler (SIGINT, this);
 	sig.registrarHandler (SIGUSR1, this);
-	messageLock.signal(0,1);
 }
 
 void Cliente::handleSignal (int signum)
@@ -101,9 +109,7 @@ void Cliente::handleSignal (int signum)
 	if (signum == SIGINT)
 		salida_requerida = 1;
 	else if (signum == SIGUSR1)
-		LOG4CXX_DEBUG(logger, "Mensaje recibido");
-		message.get().accept(*this);
-		messageLock.signal(0,1);
+		mensajes_pendientes = 1;
 }
 
 void Cliente::visit (const JoinMessage& msg){

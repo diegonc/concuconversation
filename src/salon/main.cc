@@ -6,6 +6,7 @@
 #include <SalonServer.h>
 
 #include <log4cxx/consoleappender.h>
+#include <log4cxx/fileappender.h>
 #include <log4cxx/logger.h>
 #include <log4cxx/logmanager.h>
 #include <log4cxx/patternlayout.h>
@@ -14,21 +15,23 @@
 static void configure_root_logger (bool debug)
 {
 	log4cxx::LoggerPtr root = log4cxx::Logger::getRootLogger ();
-	log4cxx::ConsoleAppenderPtr appender (new log4cxx::ConsoleAppender ());
 	log4cxx::LogString TTCC_CONVERSION_PATTERN (
-		LOG4CXX_STR("%r %p %c - %m%n"));
+			LOG4CXX_STR("%r %p %c - %m%n"));
 	log4cxx::LayoutPtr layout (new log4cxx::PatternLayout (
-			TTCC_CONVERSION_PATTERN));
+				TTCC_CONVERSION_PATTERN));
+	log4cxx::FileAppenderPtr appender(new log4cxx::FileAppender(layout, "salon.txt", true));
+	//log4cxx::ConsoleAppenderPtr appender (new log4cxx::ConsoleAppender ());
+
 
 	if (debug)
 		root->setLevel (log4cxx::Level::getDebug ());
 	else
-		root->setLevel (log4cxx::Level::getError ());
+		root->setLevel (log4cxx::Level::getDebug ());
 
 	appender->setLayout (layout);
 
-	log4cxx::helpers::Pool pool;
-	appender->activateOptions (pool);
+	//log4cxx::helpers::Pool pool;
+	//appender->activateOptions (pool);
 
 	root->addAppender (appender);
 

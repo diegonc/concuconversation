@@ -24,7 +24,6 @@ class ConsoleManager
 		};
 
 	private:
-		ConsoleListener& listener;
 		/* TODO: mover a Cliente */
 		sigset_t mask;
 		/*************************/
@@ -35,6 +34,7 @@ class ConsoleManager
 		WINDOW* input;
 		WINDOW* logging;
 		std::vector<char> input_buffer;
+		ConsoleListener& listener;
 
 		int next_char (WINDOW *w);
 

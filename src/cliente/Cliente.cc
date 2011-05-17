@@ -49,14 +49,11 @@ Cliente::Cliente (const ArgParser& args)
 	  console (*this),
 	  loginit (console, args),
 	  name (args.nombre ()),
-	  message(IPCName(args.salon ().c_str(),getpid()),0666 | IPC_CREAT),
-	  messageLock(IPCName(args.salon ().c_str(),getpid()),2,0666 | IPC_CREAT),
+	  message(IPCName("cliente",getpid()),0666 | IPC_CREAT),
+	  messageLock(IPCName("cliente",getpid()),2,0666 | IPC_CREAT),
 	  salon (args.salon ())
 {
 	messageLock.initialize();
-	messageLock.set(0,1);
-	messageLock.set(1,0);
-
 	LOG4CXX_DEBUG(logger, "Join salon [" << args.salon() << "] with name [" << args.nombre() << "].");
 	salon.join (name, getpid (), "" /* usuario.getNamespace () */);
 }
@@ -73,20 +70,12 @@ void Cliente::run ()
 
 	do {
 		cause = console.run ();
-		if (mensajes_pendientes != 0) {
-			mensajes_pendientes = 0;
-
-			LOG4CXX_DEBUG(logger, "Esperando mensaje");
-			messageLock.wait(1,1);
-			message.get().accept(*this);
-			LOG4CXX_DEBUG(logger, "Mensaje recibido");
-			messageLock.signal(0,1);
-		}
 	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
 }
 
 void Cliente::onInputLine (const std::string& text)
 {
+	LOG4CXX_DEBUG (logger, "Postenado mensaje: " << text);
 	salon.post (TextMessage (name, text));
 	/* TODO: quitar cuando se lea el mensaje desde el salon. */
 	/* console.append (text); */
@@ -104,6 +93,7 @@ void Cliente::setupSignals ()
 	SignalHandler& sig = SignalHandler::getInstance ();
 	sig.registrarHandler (SIGINT, this);
 	sig.registrarHandler (SIGUSR1, this);
+	messageLock.signal(0,1);
 }
 
 void Cliente::handleSignal (int signum)
@@ -111,7 +101,9 @@ void Cliente::handleSignal (int signum)
 	if (signum == SIGINT)
 		salida_requerida = 1;
 	else if (signum == SIGUSR1)
-		mensajes_pendientes = 1;
+		LOG4CXX_DEBUG(logger, "Mensaje recibido");
+		message.get().accept(*this);
+		messageLock.signal(0,1);
 }
 
 void Cliente::visit (const JoinMessage& msg){

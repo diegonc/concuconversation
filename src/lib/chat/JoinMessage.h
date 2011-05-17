@@ -10,6 +10,7 @@ class JoinMessage;
 #include <chat/Message.h>
 #include <chat/MessageVisitor.h>
 #include <chat/Packet.h>
+#include <log4cxx/logger.h>
 
 class JoinMessage : public Message
 {
@@ -17,6 +18,7 @@ class JoinMessage : public Message
 		static const int MESSAGE_ID = 1;
 
 	private:
+		static log4cxx::LoggerPtr logger;
 		std::string name;
 		pid_t pid;
 		std::string ipcNamespace;

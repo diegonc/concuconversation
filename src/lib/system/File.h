@@ -6,19 +6,19 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <log4cxx/logger.h>
 
 class File
 {
 	private:
-		static log4cxx::LoggerPtr logger;
 		int fd;
-		char nombre[255];
-		void inicializar (const char *path, int flags);
+
+		void inicializar (const char *path, int flags, mode_t mode);
 
 	public:
 		File (const std::string &path, int flags);
+		File (const std::string &path, int flags, mode_t mode);
 		File (const char *path, int flags);
+		File (const char *path, int flags, mode_t mode);
 		~File ();
 
 		int write (size_t n, const char *data);

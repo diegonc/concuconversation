@@ -12,8 +12,8 @@ namespace {
 UsuarioRemoto::UsuarioRemoto (const std::string& name, pid_t owner, const std::string& salonName)
 	: owner (owner),
 	  name (name),
-	  message (IPCName("cliente", owner),0666),
-	  lock (IPCName("cliente", owner),2,0666)
+	  message (IPCName(salonName.c_str(), owner),0666),
+	  lock (IPCName(salonName.c_str(), owner),2,0666)
 {
 
 }

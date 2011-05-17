@@ -11,10 +11,12 @@
 #include <chat/MessageVisitor.h>
 #include <system/FileUnlinker.h>
 #include <system/Semaphore.h>
+#include <log4cxx/logger.h>
 
 class SalonServer : public MessageVisitor
 {
 	private:
+		static log4cxx::LoggerPtr logger;
 		std::string salonName;
 		Semaphore lockForWriters;
 		MessageReader messages;

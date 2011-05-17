@@ -7,6 +7,8 @@
 #include <io/InputStream.h>
 #include <io/FifoInputStream.h>
 
+log4cxx::LoggerPtr SalonServer::logger (log4cxx::Logger::getLogger ("SalonServer"));
+
 SalonServer::SalonServer (const ArgParser &args)
 	: salonName(args.salon()),
 	  lockForWriters (IPCName (args.salon().c_str (), 'L'), 1,
@@ -30,8 +32,10 @@ SalonServer::~SalonServer ()
 void SalonServer::run ()
 {
 	while (true) {
+		LOG4CXX_DEBUG(logger,"Reading messages");
 		std::auto_ptr<Message> msg (messages.readMessage ());
 		/* TODO: escribir mensaje en log. */
+		LOG4CXX_DEBUG(logger,"Message" << msg->toString());
 		msg->accept (*this);
 	}
 }

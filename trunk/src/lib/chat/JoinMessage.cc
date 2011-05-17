@@ -4,6 +4,8 @@
 #include <chat/JoinMessage.h>
 #include <chat/Packet.h>
 
+log4cxx::LoggerPtr JoinMessage::logger (log4cxx::Logger::getLogger ("JoinMessage"));
+
 JoinMessage::JoinMessage (const std::string& name, pid_t pid, const std::string& ipcNamespace)
 	: name (name),
 	  pid (pid),
@@ -29,7 +31,7 @@ void JoinMessage::write (OutputStream& stream) const
 	pkt.pushInt (pid);
 	pkt.pushString (name);
 	pkt.pushString (ipcNamespace);
-
+	LOG4CXX_DEBUG(logger,"escribiendo mensaje");
 	pkt.write (stream);
 }
 

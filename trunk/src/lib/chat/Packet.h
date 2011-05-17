@@ -5,10 +5,12 @@
 #include <string>
 
 #include <io/OutputStream.h>
+#include <log4cxx/logger.h>
 
 class Packet
 {
 	private:
+		static log4cxx::LoggerPtr logger;
 		std::vector<char> buffer;
 		int cursor;
 

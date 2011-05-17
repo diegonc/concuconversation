@@ -2,6 +2,8 @@
 
 #include <chat/Packet.h>
 
+log4cxx::LoggerPtr Packet::logger (log4cxx::Logger::getLogger ("Packet"));
+
 Packet::Packet ()
 {
 	/* Reserva el primer entero para el tamaño. */
@@ -33,7 +35,9 @@ void Packet::pushString (const std::string& s)
 void Packet::write (OutputStream& stream)
 {
 	update_size ();
+	LOG4CXX_DEBUG(logger,"Poniendo en el stream.");
 	stream.write (buffer.size(), &buffer[0]);
+	LOG4CXX_DEBUG(logger,"Ya lo puse en el stream.");
 }
 
 void Packet::update_size ()

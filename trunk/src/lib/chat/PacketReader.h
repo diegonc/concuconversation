@@ -5,10 +5,12 @@
 
 #include <chat/Packet.h>
 #include <io/InputStream.h>
+#include <log4cxx/logger.h>
 
 class PacketReader
 {
 	private:
+	static log4cxx::LoggerPtr logger;
 		std::auto_ptr<InputStream> stream;
 
 	public:

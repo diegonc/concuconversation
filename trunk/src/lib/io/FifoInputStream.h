@@ -5,10 +5,12 @@
 
 #include <io/InputStream.h>
 #include <system/File.h>
+#include <log4cxx/logger.h>
 
 class FifoInputStream : public InputStream
 {
 	private:
+		static log4cxx::LoggerPtr logger;
 		File fifo;
 
 	public:

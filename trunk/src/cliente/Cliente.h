@@ -21,14 +21,13 @@ class Cliente : public ConsoleListener, public EventHandler, public MessageVisit
 	private:
 		volatile sig_atomic_t mensajes_pendientes;
 		volatile sig_atomic_t salida_requerida;
-
 		ConsoleManager console;
 		LoggingInitialization loginit;
-		SalonRemoto salon;
-		std::string name;
 
+		std::string name;
 		Semaphore messageLock;
 		SharedVariable<Message> message;
+		SalonRemoto salon;
 
 		void setupSignals ();
 

@@ -17,6 +17,8 @@ libSources = \
 	lib/chat/PacketReader.h \
 	lib/chat/QuitMessage.cc \
 	lib/chat/QuitMessage.h \
+	lib/chat/SharedMessage.cc \
+	lib/chat/SharedMessage.h \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
 	lib/io/FifoInputStream.cc \

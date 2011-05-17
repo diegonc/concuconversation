@@ -4,6 +4,7 @@
 #include <SalonServer.h>
 #include <chat/MessageFactory.h>
 #include <chat/PacketReader.h>
+#include <io/EOFException.h>
 #include <io/InputStream.h>
 #include <io/FifoInputStream.h>
 
@@ -31,12 +32,17 @@ SalonServer::~SalonServer ()
 
 void SalonServer::run ()
 {
-	while (true) {
-		LOG4CXX_DEBUG(logger,"Reading messages");
-		std::auto_ptr<Message> msg (messages.readMessage ());
-		/* TODO: escribir mensaje en log. */
-		LOG4CXX_DEBUG(logger,"Message" << msg->toString());
-		msg->accept (*this);
+	try {
+		while (true) {
+			LOG4CXX_DEBUG(logger,"Reading messages");
+			std::auto_ptr<Message> msg (messages.readMessage ());
+			/* TODO: escribir mensaje en log. */
+			LOG4CXX_DEBUG(logger,"Message" << msg->toString());
+			msg->accept (*this);
+		}
+	} catch (EOFException e) {
+		/* EOF luego de que todos los clientes salieran.
+		 * se termina el servidor. */
 	}
 }
 

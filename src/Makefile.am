@@ -21,6 +21,7 @@ libSources = \
 	lib/chat/SharedMessage.h \
 	lib/chat/TextMessage.cc \
 	lib/chat/TextMessage.h \
+	lib/io/EOFException.h \
 	lib/io/FifoInputStream.cc \
 	lib/io/FifoInputStream.h \
 	lib/io/FifoOutputStream.cc \

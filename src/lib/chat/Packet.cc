@@ -18,15 +18,15 @@ void Packet::pushByte (char c)
 
 void Packet::pushInt (int i)
 {
-	buffer.push_back ( (i >>  0) & 0xFF );
-	buffer.push_back ( (i >>  8) & 0xFF );
-	buffer.push_back ( (i >> 16) & 0xFF );
-	buffer.push_back ( (i >> 24) & 0xFF );
+	buffer.push_back ((char)((i >>  0) & 0xFF) );
+	buffer.push_back ((char)((i >>  8) & 0xFF) );
+	buffer.push_back ((char)((i >> 16) & 0xFF) );
+	buffer.push_back ((char)((i >> 24) & 0xFF) );
 }
 
 void Packet::pushString (const std::string& s)
 {
-	for (int i=0; i < s.size(); i++)
+	for (unsigned i=0; i < s.size(); i++)
 		buffer.push_back (s[i]);
 	/* null terminated */
 	buffer.push_back (0);
@@ -43,10 +43,10 @@ void Packet::write (OutputStream& stream)
 void Packet::update_size ()
 {
 	int sz = buffer.size();
-	buffer[0] = (sz >>  0) & 0xFF;
-	buffer[1] = (sz >>  8) & 0xFF;
-	buffer[2] = (sz >> 16) & 0xFF;
-	buffer[3] = (sz >> 24) & 0xFF;
+	buffer[0] = (char)((sz >>  0) & 0xFF);
+	buffer[1] = (char)((sz >>  8) & 0xFF);
+	buffer[2] = (char)((sz >> 16) & 0xFF);
+	buffer[3] = (char)((sz >> 24) & 0xFF);
 }
 
 void Packet::rewind ()
@@ -71,12 +71,12 @@ int Packet::readInt ()
 
 std::string Packet::readString ()
 {
-	int end = cursor;
+	unsigned end = cursor;
         while (end < buffer.size () && buffer[end] != 0)
 		end++;
 
 	if (end < buffer.size ()) {
-		int start = cursor;
+		unsigned start = cursor;
 		cursor = end + 1;
 		return std::string (&buffer[start], end - start);
 	}

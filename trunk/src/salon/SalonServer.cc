@@ -11,12 +11,12 @@
 log4cxx::LoggerPtr SalonServer::logger (log4cxx::Logger::getLogger ("SalonServer"));
 
 SalonServer::SalonServer (const ArgParser &args)
-	: salonName(args.salon()),
+	: salonName(args.salon ()),
+	  roomNode (args.salon (), 0666),
 	  lockForWriters (IPCName (args.salon().c_str (), 'L'), 1,
 		0666 | IPC_CREAT | IPC_EXCL),
 	  messages (new PacketReader (new FifoInputStream (args.salon ())),
-		new MessageFactory ()),
-	  roomUnlinker (args.salon ())
+		new MessageFactory ())
 {
 	/* Permite a los clientes comenzar a escribir. */
 	lockForWriters.initialize ();
@@ -37,7 +37,7 @@ void SalonServer::run ()
 			LOG4CXX_DEBUG(logger,"Reading messages");
 			std::auto_ptr<Message> msg (messages.readMessage ());
 			/* TODO: escribir mensaje en log. */
-			LOG4CXX_DEBUG(logger,"Message" << msg->toString());
+			LOG4CXX_DEBUG(logger,"Message: " << msg->toString());
 			msg->accept (*this);
 		}
 	} catch (EOFException e) {

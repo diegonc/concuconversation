@@ -29,6 +29,8 @@ libSources = \
 	lib/io/InputStream.h \
 	lib/io/OutputStream.h \
 	lib/system/EventHandler.h \
+	lib/system/FifoFilesystemObject.cc \
+	lib/system/FifoFilesystemObject.h \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \

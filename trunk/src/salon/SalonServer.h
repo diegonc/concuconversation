@@ -9,7 +9,7 @@
 #include <chat/Message.h>
 #include <chat/MessageReader.h>
 #include <chat/MessageVisitor.h>
-#include <system/FileUnlinker.h>
+#include <system/FifoFilesystemObject.h>
 #include <system/Semaphore.h>
 #include <log4cxx/logger.h>
 
@@ -17,14 +17,13 @@ class SalonServer : public MessageVisitor
 {
 	private:
 		static log4cxx::LoggerPtr logger;
-		std::string salonName;
-		Semaphore lockForWriters;
-		MessageReader messages;
 
 		typedef std::map<std::string, UsuarioRemoto *> MapUsuarios;
 		MapUsuarios usuarios;
-
-		FileUnlinker roomUnlinker;
+		std::string salonName;
+		FifoFilesystemObject roomNode;
+		Semaphore lockForWriters;
+		MessageReader messages;
 
 	public:
 		SalonServer (const ArgParser &args);

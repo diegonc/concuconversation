@@ -17,7 +17,7 @@ std::auto_ptr<Packet> PacketReader::readPacket ()
 	union {
 		char bytes[4];
 		int  number;
-	} packet_size = {0};
+	} packet_size = {{0}};
 	LOG4CXX_DEBUG(logger,"tomando cosas del stream.");
 	stream->read (4, &packet_size.bytes[0]);
 	packet_size.number = packet_size.bytes[0]

@@ -34,15 +34,17 @@ class ArrayInputStream : public InputStream
 		ArrayInputStream (char *b, unsigned s)
 			: size (s), cursor (0), array (b) { }
 
-		void read (size_t n, char *data);
+		bool read (size_t n, char *data);
 };
 
-void ArrayInputStream::read (size_t n, char *data)
+bool ArrayInputStream::read (size_t n, char *data)
 {
 	if ( (size - cursor) > n) {
 		memcpy (data, &array[cursor], n);
 		cursor += n;
-	} /*TODO: excepcion si no hay espacio? */
+		return true;
+	}
+	return false;
 }
 
 void SharedMessage::set (const Message& msg)

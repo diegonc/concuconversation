@@ -16,7 +16,7 @@ class FifoInputStream : public InputStream
 	public:
 		FifoInputStream (const std::string &path);
 
-		void read (size_t n, char *data);
+		bool read (size_t n, char *data);
 };
 
 #endif

@@ -6,7 +6,7 @@
 class InputStream
 {
 	public:
-		virtual void read (size_t n, char *data) = 0;
+		virtual bool read (size_t n, char *data) = 0;
 };
 
 #endif

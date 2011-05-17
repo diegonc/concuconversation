@@ -114,19 +114,15 @@ void Cliente::handleSignal (int signum)
 
 void Cliente::visit (const JoinMessage& msg){
 	LOG4CXX_DEBUG (logger, "JOIN: " << msg.toString());
-
-	console.append("JOIN");
 	console.append(msg.toString());
 }
 
 void Cliente::visit (const QuitMessage& msg){
 	LOG4CXX_DEBUG(logger, "QUIT: " <<msg.toString());
-	console.append("QUIT");
 	console.append(msg.toString());
 }
 
 void Cliente::visit (const TextMessage& msg){
 	LOG4CXX_DEBUG(logger, "TEXTO: " << msg.toString());
-	console.append("TEXTO");
 	console.append(msg.toString());
 }

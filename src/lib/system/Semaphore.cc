@@ -9,6 +9,14 @@
 #include <system/Semaphore.h>
 #include <system/System.h>
 
+namespace {
+	union  semun {
+		int val;
+		struct semid_ds *buf;
+		unsigned short  *array;
+	} arg;
+}
+
 log4cxx::LoggerPtr Semaphore::logger (log4cxx::Logger::getLogger ("Semaphore"));
 
 Semaphore::Semaphore (IPCName name, int nsems, int flags) : nsems (nsems)
@@ -33,7 +41,8 @@ Semaphore::Semaphore (key_t key, int nsems, int flags) : nsems (nsems)
 
 Semaphore::~Semaphore ()
 {
-	semctl (id, 0, IPC_RMID);
+	union semun arg = {0};
+	semctl (id, 0, IPC_RMID, arg);
 }
 
 void Semaphore::initialize ()
@@ -46,12 +55,6 @@ void Semaphore::initialize ()
 
 void Semaphore::set (int idx, int value)
 {
-	union  semun {
-		int val;
-		struct semid_ds *buf;
-		unsigned short  *array;
-	} arg;
-
 	arg.val = value;
 	semctl (id, idx, SETVAL, arg);
 

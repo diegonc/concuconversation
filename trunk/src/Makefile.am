@@ -11,6 +11,7 @@ libSources = \
 	lib/chat/MessageFactory.h \
 	lib/chat/MessageReader.cc \
 	lib/chat/MessageReader.h \
+	lib/chat/MessageVisitor.h \
 	lib/chat/Packet.cc \
 	lib/chat/Packet.h \
 	lib/chat/PacketReader.cc \
@@ -34,17 +35,19 @@ libSources = \
 	lib/system/File.cc \
 	lib/system/File.h \
 	lib/system/FileExistsException.h \
+	lib/system/FileUnlinker.h \
 	lib/system/IPCName.h \
 	lib/system/Semaphore.cc \
 	lib/system/Semaphore.h \
 	lib/system/SharedBuffer.cc \
 	lib/system/SharedBuffer.h \
+	lib/system/SharedVariable.h \
 	lib/system/SignalHandler.cc \
 	lib/system/SignalHandler.h \
 	lib/system/System.cc \
 	lib/system/System.h \
 	lib/utils/NonCopyable.h
-
+	
 clienteSources = \
 	cliente/ArgParser.cc \
 	cliente/ArgParser.h \

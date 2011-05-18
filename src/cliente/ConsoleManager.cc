@@ -157,8 +157,11 @@ void ConsoleManager::refresh ()
 WINDOW *ConsoleManager::getLoggingWindow ()
 {
 	if (!logging) {
+		wresize (msg, LINES - input_size - log_size, COLS);
+		mvwin (msg, log_size, 0);
 		logging = newwin (log_size, COLS, 0, 0);
 		scrollok (logging, TRUE);
+		scrollok (msg, TRUE);
 	}
 	return logging;
 }

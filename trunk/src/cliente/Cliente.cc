@@ -80,6 +80,7 @@ void Cliente::run ()
 			messageLock.signal(0,1);
 		}
 	} while (salida_requerida == 0 && cause != ConsoleManager::EXIT_REQUESTED);
+	salon.quit (name);
 }
 
 void Cliente::onInputLine (const std::string& text)

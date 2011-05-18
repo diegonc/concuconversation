@@ -9,6 +9,7 @@
 #include <log4cxx/CursesAppender.h>
 #include <log4cxx/level.h>
 #include <log4cxx/logger.h>
+#include <log4cxx/fileappender.h>
 #include <log4cxx/logmanager.h>
 #include <log4cxx/patternlayout.h>
 
@@ -23,9 +24,10 @@ LoggingInitialization::LoggingInitialization (ConsoleManager& cm, const ArgParse
 	log4cxx::LoggerPtr root = log4cxx::Logger::getRootLogger ();
 	CursesAppenderPtr appender (new CursesAppender (&cm));
 	log4cxx::LogString TTCC_CONVERSION_PATTERN (
-		LOG4CXX_STR("%r %p %c - %m%n"));
+		LOG4CXX_STR("%6r %5p %c - %m%n"));
 	log4cxx::LayoutPtr layout (new log4cxx::PatternLayout (
 			TTCC_CONVERSION_PATTERN));
+	log4cxx::FileAppenderPtr fileAppender(new log4cxx::FileAppender(layout, "cliente.txt", true));
 
 	if (debug)
 		root->setLevel (log4cxx::Level::getDebug ());
@@ -38,6 +40,7 @@ LoggingInitialization::LoggingInitialization (ConsoleManager& cm, const ArgParse
 	appender->activateOptions (pool);
 
 	root->addAppender (appender);
+	root->addAppender (fileAppender);
 
 	log4cxx::LogManager::getLoggerRepository()->setConfigured (true);
 	LOG4CXX_DEBUG (root, "log4cxx inicializado.");

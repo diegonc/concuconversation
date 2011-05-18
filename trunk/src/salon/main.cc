@@ -16,24 +16,26 @@ static void configure_root_logger (bool debug)
 {
 	log4cxx::LoggerPtr root = log4cxx::Logger::getRootLogger ();
 	log4cxx::LogString TTCC_CONVERSION_PATTERN (
-			LOG4CXX_STR("%r %p %c - %m%n"));
+			LOG4CXX_STR("%6r %5p %c - %m%n"));
 	log4cxx::LayoutPtr layout (new log4cxx::PatternLayout (
 				TTCC_CONVERSION_PATTERN));
-	log4cxx::FileAppenderPtr appender(new log4cxx::FileAppender(layout, "salon.txt", true));
-	//log4cxx::ConsoleAppenderPtr appender (new log4cxx::ConsoleAppender ());
+	log4cxx::FileAppenderPtr fileAppender(new log4cxx::FileAppender(layout, "salon.txt", true));
+	log4cxx::ConsoleAppenderPtr consoleAppender (new log4cxx::ConsoleAppender ());
 
 
 	if (debug)
 		root->setLevel (log4cxx::Level::getDebug ());
 	else
-		root->setLevel (log4cxx::Level::getDebug ());
+		root->setLevel (log4cxx::Level::getError ());
 
-	appender->setLayout (layout);
+	fileAppender->setLayout (layout);
+	consoleAppender->setLayout (layout);
 
-	//log4cxx::helpers::Pool pool;
-	//appender->activateOptions (pool);
+	log4cxx::helpers::Pool pool;
+	consoleAppender->activateOptions (pool);
 
-	root->addAppender (appender);
+	root->addAppender (fileAppender);
+	root->addAppender (consoleAppender);
 
 	log4cxx::LogManager::getLoggerRepository()->setConfigured (true);
 	LOG4CXX_DEBUG (root, "log4cxx inicializado.");

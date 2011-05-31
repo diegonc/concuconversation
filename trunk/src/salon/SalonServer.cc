@@ -63,9 +63,14 @@ void SalonServer::visit (const JoinMessage& msg)
 
 void SalonServer::visit (const QuitMessage& msg)
 {
-	int salio = usuarios.erase (msg.getNombre ());
-	if (salio == 0)
+	MapUsuarios::iterator it = usuarios.find (msg.getNombre ());
+	if (it == usuarios.end ())
 		return;
+
+	UsuarioRemoto *usuario = it->second;
+	delete usuario;
+	usuarios.erase (it);
+
 	for (MapUsuarios::iterator it = usuarios.begin ();
 			it != usuarios.end (); ++it) {
 		it->second->recibir (msg);

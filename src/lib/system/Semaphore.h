@@ -13,6 +13,7 @@ class Semaphore
 	private:
 		static log4cxx::LoggerPtr logger;
 
+		bool persistent;
 		int id;
 		const int nsems;
 
@@ -21,6 +22,7 @@ class Semaphore
 		Semaphore (IPCName name, int nsems, int flags);
 		virtual ~Semaphore ();
 
+		Semaphore *persist ();
 		void initialize ();
 
 		void set (int idx, int value);

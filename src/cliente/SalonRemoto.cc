@@ -18,7 +18,8 @@ SalonRemoto::SalonRemoto (const std::string& salon)
 	LOG4CXX_DEBUG(logger, "Creando el salon remoto");
 	fifo = iniciar (salon);
 	LOG4CXX_DEBUG(logger, "Paso el fifo");
-	lock = new Semaphore (IPCName (salon.c_str(), 'L'), 1, 0666);
+	lock = (new Semaphore (IPCName (salon.c_str(), 'L'), 1, 0666))
+		->persist ();
 	LOG4CXX_DEBUG(logger, "Paso el lock");
 }
 

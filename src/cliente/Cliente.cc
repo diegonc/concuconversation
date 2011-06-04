@@ -53,7 +53,7 @@ Cliente::Cliente (const ArgParser& args)
 	  loginit (console, args),
 	  name (args.nombre ()),
 	  salon (args.salon ()),
-	  messageLock(IPCName(args.salon().c_str(),getpid()),2,0666 | IPC_CREAT),
+	  messageLock(IPCName(args.salon().c_str(),getpid()),1,0666 | IPC_CREAT),
 	  message(IPCName(args.salon().c_str(),getpid()),0666 | IPC_CREAT)
 {
 	messageLock.initialize();

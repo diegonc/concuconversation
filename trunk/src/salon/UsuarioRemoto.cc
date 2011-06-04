@@ -13,7 +13,7 @@ UsuarioRemoto::UsuarioRemoto (const std::string& name, pid_t owner, const std::s
 	: owner (owner),
 	  name (name),
 	  message (IPCName(salonName.c_str(), owner),0666),
-	  lock (IPCName(salonName.c_str(), owner),2,0666)
+	  lock (IPCName(salonName.c_str(), owner),1,0666)
 {
 
 }

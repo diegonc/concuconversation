@@ -29,6 +29,7 @@ Semaphore::Semaphore (IPCName name, int nsems, int flags) : nsems (nsems)
 	System::check (token);
 	id = semget (token, nsems, flags);
 	System::check (id);
+	persistent = false;
 
 	LOG4CXX_DEBUG(logger, "Semaphore created: set:" << id);
 }
@@ -37,12 +38,15 @@ Semaphore::Semaphore (key_t key, int nsems, int flags) : nsems (nsems)
 {
 	id = semget (key, nsems, flags);
 	System::check (id);
+	persistent = false;
 }
 
 Semaphore::~Semaphore ()
 {
-	union semun arg = {0};
-	semctl (id, 0, IPC_RMID, arg);
+	if (!persistent) {
+		union semun arg = {0};
+		semctl (id, 0, IPC_RMID, arg);
+	}
 }
 
 void Semaphore::initialize ()
@@ -51,6 +55,12 @@ void Semaphore::initialize ()
 
 	for (int i=0; i < nsems; i++)
 		set (i, 0);
+}
+
+Semaphore *Semaphore::persist ()
+{
+	persistent = true;
+	return this;
 }
 
 void Semaphore::set (int idx, int value)

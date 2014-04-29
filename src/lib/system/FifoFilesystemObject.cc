@@ -1,5 +1,6 @@
 #include <system/FifoFilesystemObject.h>
 #include <system/System.h>
+#include <unistd.h>
 
 FifoFilesystemObject::FifoFilesystemObject (const std::string& path, int flags)
 	: path (path)
